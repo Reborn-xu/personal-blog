@@ -16,9 +16,18 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <spring.shiro.version>1.6.0</spring.shiro.version>
     </properties>
 
     <dependencies>
+
+        <!-- shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${spring.shiro.version}</version>
+        </dependency>
+
         <!--分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
