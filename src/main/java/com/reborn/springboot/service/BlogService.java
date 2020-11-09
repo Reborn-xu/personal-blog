@@ -1,0 +1,19 @@
+package com.reborn.springboot.service;
+
+import com.github.pagehelper.PageInfo;
+import com.reborn.springboot.entity.Blog;
+
+import java.util.List;
+import java.util.Map;
+
+public interface BlogService {
+     PageInfo<Blog> getBlogsPage(Map<String,Object> map);
+
+     String saveBlog(Blog blog);
+
+    Blog getBlogByPrimary(Long blogId);
+
+    String updateBlog(Blog blog);
+
+    String deleteBlogs(Integer[] ids);
+}

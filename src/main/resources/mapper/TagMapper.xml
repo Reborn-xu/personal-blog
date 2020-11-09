@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reborn.springboot.dao.TagMapper">
+
+    <select id="findTagList" resultType="com.reborn.springboot.entity.BlogTag">
+        select *
+        from tb_blog_tag
+        where is_deleted=0
+    </select>
+
+    <select id="selectTag" parameterType="java.util.Map" resultType="com.reborn.springboot.entity.BlogTag">
+        select *
+        from tb_blog_tag
+        where
+        <if test="tagId!=null">
+            tag_id=#{tagId} and
+        </if>
+        <if test="tagName!=null">
+            tag_name=#{tagName} and
+        </if>
+        is_deleted=0
+    </select>
+
+    <insert id="insertNewTag" parameterType="com.reborn.springboot.entity.BlogTag"
+            useGeneratedKeys="true" keyProperty="tagId" keyColumn="tag_id">
+        insert into tb_blog_tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tagId!=null">tag_id,</if>
+            <if test="tagName!=null">tag_name,</if>
+            <if test="isDeleted!=null">is_deleted,</if>
+            <if test="createTime!=null">create_time,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tagId!=null">#{tagId},</if>
+            <if test="tagName!=null">#{tagName},</if>
+            <if test="isDeleted!=null">#{isDeleted},</if>
+            <if test="createTime!=null">#{createTime},</if>
+        </trim>
+    </insert>
+</mapper>

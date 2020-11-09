@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reborn.springboot.dao.CategoryMapper">
+
+    <select id="findCategoryList" resultType="com.reborn.springboot.entity.BlogCategory">
+        select *
+        from tb_blog_category
+        where is_deleted=0
+    </select>
+
+    <select id="findCategoryById" resultType="com.reborn.springboot.entity.BlogCategory" parameterType="int">
+        select *
+        from tb_blog_category
+        where category_id=#{categoryId}
+        and is_deleted=0
+    </select>
+</mapper>

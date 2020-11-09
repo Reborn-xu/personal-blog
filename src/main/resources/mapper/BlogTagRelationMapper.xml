@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reborn.springboot.dao.BlogTagRelationMapper">
+
+    <insert id="insertNew" parameterType="com.reborn.springboot.entity.BlogTagRelation">
+        insert into tb_blog_tag_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="relationId!=null">relation_id,</if>
+            <if test="blogId!=null">blog_id,</if>
+            <if test="tagId!=null">tag_id,</if>
+            <if test="createTime!=null">create_time,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="relationId!=null">#{relationId},</if>
+            <if test="blogId!=null">#{blogId},</if>
+            <if test="tagId!=null">#{tagId},</if>
+            <if test="createTime!=null">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <delete id="deleteBlogTagRelation" parameterType="java.util.Map">
+        delete from tb_blog_tag_relation
+        where
+        <if test="blogId!=null">blog_id=#{blogId} and </if>
+        <if test="tagId!=null">tag_id=#{tagId} and </if>
+        1=1
+    </delete>
+</mapper>

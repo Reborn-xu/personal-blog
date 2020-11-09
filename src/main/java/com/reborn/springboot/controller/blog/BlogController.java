@@ -1,0 +1,14 @@
+package com.reborn.springboot.controller.blog;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class BlogController {
+
+    @RequestMapping(path = {"/","/index","/index.html"})
+    public String index(){
+        return "blog/index";
+    }
+}
