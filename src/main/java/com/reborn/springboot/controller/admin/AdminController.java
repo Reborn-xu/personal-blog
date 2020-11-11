@@ -1,6 +1,7 @@
 package com.reborn.springboot.controller.admin;
 
 import com.reborn.springboot.entity.User;
+import org.apache.catalina.Session;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -13,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
+
 
 @RequestMapping("/admin")
 @Controller
@@ -28,7 +32,7 @@ public class AdminController {
         return "login";
     }
     @PostMapping("/loginCheck")
-    public String loginCheck(String username,String password,Model model){
+    public String loginCheck(String username, String password, Model model, HttpSession session){
         System.out.println(username+password);
         /**
          * shiro编写认证操作
@@ -39,6 +43,10 @@ public class AdminController {
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
         try {
             subject.login(token);
+            User user=(User) subject.getPrincipal();
+            session.setAttribute("user", user);
+            System.out.println("-- "+subject.hasRole("admin"));
+            System.out.println("-- "+subject.hasRole("customer"));
         }catch (UnknownAccountException e) {
             //e.printStackTrace();
             //登录失败:用户名不存在

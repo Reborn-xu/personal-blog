@@ -20,8 +20,15 @@ public class User implements Serializable{
 
     private Byte locked;
 
-    //用户 拥有的角色集合
-    private Set<Role> roles;
+    private int roleId;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
 
     public int getUserId() {
         return userId;
@@ -63,11 +70,4 @@ public class User implements Serializable{
         this.locked = locked;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 }

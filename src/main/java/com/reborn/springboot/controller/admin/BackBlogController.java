@@ -6,6 +6,7 @@ import com.reborn.springboot.entity.Result;
 import com.reborn.springboot.service.BlogService;
 import com.reborn.springboot.service.CategoryService;
 import com.reborn.springboot.utils.ResultGenerator;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +45,21 @@ public class BackBlogController {
     @RequestMapping("/blogs/list")
     @ResponseBody
     public Result blogsList(@RequestParam Map<String,Object> map){
+        if (StringUtils.isEmpty(map.get("pageNum"))||StringUtils.isEmpty(map.get("pageSize"))){
+            return ResultGenerator.getFailResult("参数异常");
+        }
+        PageInfo blogs = blogService.getBlogsPage(map);
+        return ResultGenerator.getSuccessResult(blogs);
+    }
+
+    /**
+     * 用户的所有博客
+     * @param map
+     * @return
+     */
+    @RequestMapping("/blogs/customerList")
+    @ResponseBody
+    public Result customerBlogsList(@RequestParam Map<String,Object> map){
         if (StringUtils.isEmpty(map.get("pageNum"))||StringUtils.isEmpty(map.get("pageSize"))){
             return ResultGenerator.getFailResult("参数异常");
         }
@@ -97,6 +113,7 @@ public class BackBlogController {
 
     @PostMapping("/blogs/delete")
     @ResponseBody
+    @RequiresRoles(value = "admin")
     public Result deleteBlogs(@RequestBody Integer[] ids){
         String result = blogService.deleteBlogs(ids);
         if (!result.equals("success")){

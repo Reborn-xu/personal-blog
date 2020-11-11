@@ -1,13 +1,15 @@
 package com.reborn.springboot.controller.admin;
 
+import com.github.pagehelper.PageInfo;
+import com.reborn.springboot.entity.Permission;
 import com.reborn.springboot.entity.Result;
-import com.reborn.springboot.service.TagService;
+import com.reborn.springboot.service.PermissionService;
 import com.reborn.springboot.utils.ResultGenerator;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,26 +17,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/tags")
-@RequiresRoles(value = {"admin"})
-public class TagController {
+@RequestMapping("/admin/permissions")
+public class PermissionController {
 
     @Autowired
-    private TagService tagService;
+    private PermissionService permissionService;
 
-    @RequestMapping("")
-    @RequiresRoles(value = {"admin"})
-     public String tagsPage(Model model){
-        model.addAttribute("path","tags");
-         return "admin/tag";
-     }
+    @GetMapping("")
+    public String index(Model model){
+        model.addAttribute("path","permissions");
+        return "admin/permission";
+    }
 
     @RequestMapping("/list")
     @ResponseBody
-    public Result tagsList(@RequestParam Map<String,Object> map){
+    public Result permissionsList(@RequestParam Map<String,Object> map){
         if (StringUtils.isEmpty(map.get("pageNum"))||StringUtils.isEmpty(map.get("pageSize"))){
             return ResultGenerator.getFailResult("参数异常");
         }
-        return ResultGenerator.getSuccessResult(tagService.getBlogTagsPage(map));
+        PageInfo<Permission> permissions = permissionService.getPermissionPage(map);
+        return ResultGenerator.getSuccessResult(permissions);
     }
 }
