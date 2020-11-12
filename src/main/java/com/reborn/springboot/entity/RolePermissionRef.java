@@ -3,43 +3,43 @@ package com.reborn.springboot.entity;
 import java.io.Serializable;
 
 public class RolePermissionRef implements Serializable {
-    private int rprId;
+    private Integer rprId;
 
-    private int roleId;
+    private Integer roleId;
 
-    private int permissionId;
+    private Integer permissionId;
 
-    private byte isDeleted;
+    private Byte isDeleted;
 
-    public int getRprId() {
+    public Integer getRprId() {
         return rprId;
     }
 
-    public void setRprId(int rprId) {
+    public void setRprId(Integer rprId) {
         this.rprId = rprId;
     }
 
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
-    public int getPermissionId() {
+    public Integer getPermissionId() {
         return permissionId;
     }
 
-    public void setPermissionId(int permissionId) {
+    public void setPermissionId(Integer permissionId) {
         this.permissionId = permissionId;
     }
 
-    public byte getIsDeleted() {
+    public Byte getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(byte isDeleted) {
+    public void setIsDeleted(Byte isDeleted) {
         this.isDeleted = isDeleted;
     }
 }

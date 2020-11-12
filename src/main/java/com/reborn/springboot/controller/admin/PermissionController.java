@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -37,5 +34,18 @@ public class PermissionController {
         }
         PageInfo<Permission> permissions = permissionService.getPermissionPage(map);
         return ResultGenerator.getSuccessResult(permissions);
+    }
+
+    @PostMapping("/save")
+    @ResponseBody
+    public Result savePermission(Permission permission){
+        String result = permissionService.savePermission(permission);
+//        if (permission.getPermissionId() == -1){
+//            permission.setPermissionId();
+//        }
+        if (!result.equals("success")){
+            return ResultGenerator.getFailResult("新增失败");
+        }
+        return ResultGenerator.getSuccessResult("新增成功");
     }
 }

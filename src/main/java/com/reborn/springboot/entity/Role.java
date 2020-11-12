@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Set;
 
 public class Role implements Serializable {
-    private int roleId;
+    private Integer roleId;
 
     private String roleName;
 
     private String roleDesc;
 
-    private byte isDeleted;
+    private Byte isDeleted;
 
     private List<Permission> permissions;
 
@@ -30,7 +30,7 @@ public class Role implements Serializable {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
@@ -54,7 +54,7 @@ public class Role implements Serializable {
         return isDeleted;
     }
 
-    public void setIsDeleted(byte isDeleted) {
+    public void setIsDeleted(Byte isDeleted) {
         this.isDeleted = isDeleted;
     }
 }

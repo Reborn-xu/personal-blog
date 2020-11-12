@@ -7,4 +7,6 @@ import java.util.Map;
 
 public interface PermissionService {
     PageInfo<Permission> getPermissionPage(Map<String, Object> map);
+
+    String savePermission(Permission permission);
 }

@@ -7,4 +7,23 @@
         WHERE is_deleted=0
     </select>
 
+    <insert id="insertPermission" parameterType="com.reborn.springboot.entity.Permission">
+        INSERT INTO tb_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionId!=null">permission_id,</if>
+            <if test="permissionName!=null">permission_name,</if>
+            <if test="permissionUrl!=null">permission_url,</if>
+            <if test="resourceType!=null">resource_type,</if>
+            <if test="isDeleted!=null">is_deleted,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionId!=null">#{permissionId},</if>
+            <if test="permissionName!=null">#{permissionName},</if>
+            <if test="permissionUrl!=null">#{permissionUrl},</if>
+            <if test="resourceType!=null">#{resourceType},</if>
+            <if test="isDeleted!=null">#{isDeleted},</if>
+        </trim>
+    </insert>
+
 </mapper>

@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 public class Permission implements Serializable {
-    private int permissionId;
+    private Integer permissionId;
 
     private String permissionName;
 
@@ -15,6 +15,22 @@ public class Permission implements Serializable {
     private String resourceType;
 
     private Byte isDeleted;
+
+    public Integer getPermissionId() {
+        return permissionId;
+    }
+
+    public void setPermissionId(Integer permissionId) {
+        this.permissionId = permissionId;
+    }
+
+    public String getPermissionName() {
+        return permissionName;
+    }
+
+    public void setPermissionName(String permissionName) {
+        this.permissionName = permissionName;
+    }
 
     public String getPermissionUrl() {
         return permissionUrl;
@@ -38,21 +54,5 @@ public class Permission implements Serializable {
 
     public void setIsDeleted(Byte isDeleted) {
         this.isDeleted = isDeleted;
-    }
-
-    public int getPermissionId() {
-        return permissionId;
-    }
-
-    public void setPermissionId(int permissionId) {
-        this.permissionId = permissionId;
-    }
-
-    public String getPermissionName() {
-        return permissionName;
-    }
-
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName;
     }
 }

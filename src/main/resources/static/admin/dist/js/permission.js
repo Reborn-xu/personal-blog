@@ -133,3 +133,58 @@ function deleteBlog() {
     }
 );
 }
+
+function permissionAdd() {
+    reset();
+    $('.modal-title').html('权限添加');
+    $('#categoryModal').modal('show');
+}
+function reset() {
+    $("#permissionName").val('');
+    $("#permissionUrl").val('');
+    $("#resourceType").val('');
+
+}
+
+$('#saveButton').click(function () {
+    var permissionName = $("#permissionName").val();
+    var permissionUrl = $("#permissionUrl").val();
+    var resourceType = $("#resourceType").val();
+    if (!validCN_ENString2_18(permissionName)) {
+        $('#edit-error-msg').css("display", "block");
+        $('#edit-error-msg').html("请输入符合规范的分类名称！");
+    } else {
+        var params = $("#categoryForm").serialize();
+        var url = '/admin/permissions/save';
+        var id = getSelectedRowWithoutAlert();
+        if (id != null) {
+            url = '/admin/permissions/update';
+        }
+        $.ajax({
+            type: 'POST',//方法类型
+            url: url,
+            data: params,
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    $('#categoryModal').modal('hide');
+                    swal("保存成功", {
+                        icon: "success",
+                    });
+                    reload();
+                }
+                else {
+                    $('#categoryModal').modal('hide');
+                    swal(result.message, {
+                        icon: "error",
+                    });
+                }
+                ;
+            },
+            error: function () {
+                swal("操作失败", {
+                    icon: "error",
+                });
+            }
+        });
+    }
+});

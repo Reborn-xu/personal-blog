@@ -7,4 +7,6 @@ import java.util.List;
 public interface PermissionMapper {
 
     List<Permission> findPermissionList();
+
+    int insertPermission(Permission permission);
 }

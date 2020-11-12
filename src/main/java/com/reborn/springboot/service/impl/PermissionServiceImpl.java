@@ -18,6 +18,12 @@ public class PermissionServiceImpl implements PermissionService {
     private PermissionMapper permissionMapper;
 
     @Override
+    public String savePermission(Permission permission) {
+        int result = permissionMapper.insertPermission(permission);
+        return result<=0 ? "fail":"success";
+    }
+
+    @Override
     public PageInfo<Permission> getPermissionPage(Map<String, Object> map) {
         int pageNum=Integer.parseInt((String)map.get("pageNum"));
         int pageSize=Integer.parseInt((String) map.get("pageSize"));

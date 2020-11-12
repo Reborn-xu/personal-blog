@@ -10,7 +10,7 @@ import java.util.Set;
 //@Data
 //@AllArgsConstructor
 public class User implements Serializable{
-    private int userId;
+    private Integer userId;
 
     private String username;
 
@@ -20,13 +20,13 @@ public class User implements Serializable{
 
     private Byte locked;
 
-    private int roleId;
+    private Integer roleId;
 
     public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
@@ -34,7 +34,7 @@ public class User implements Serializable{
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
