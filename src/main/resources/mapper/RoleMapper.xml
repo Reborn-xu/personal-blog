@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reborn.springboot.dao.RoleMapper">
+
+    <select id="findRoleList" resultType="com.reborn.springboot.entity.Role">
+        SELECT * FROM tb_role
+        WHERE is_deleted=0
+    </select>
+
+</mapper>

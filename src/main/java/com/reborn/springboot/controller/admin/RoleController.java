@@ -3,7 +3,9 @@ package com.reborn.springboot.controller.admin;
 import com.github.pagehelper.PageInfo;
 import com.reborn.springboot.entity.Permission;
 import com.reborn.springboot.entity.Result;
+import com.reborn.springboot.entity.Role;
 import com.reborn.springboot.service.PermissionService;
+import com.reborn.springboot.service.RoleService;
 import com.reborn.springboot.utils.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,36 +13,39 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/permissions")
-public class PermissionController {
+@RequestMapping("/admin/roles")
+public class RoleController {
+
+    @Autowired
+    private RoleService roleService;
 
     @Autowired
     private PermissionService permissionService;
 
     @GetMapping("")
     public String index(Model model){
-        model.addAttribute("path","permissions");
-        return "admin/permission";
+        model.addAttribute("path","roles");
+        //model.addAttribute("permissions",permissionService.getPermissionList());
+        return "admin/role";
     }
 
     @RequestMapping("/list")
     @ResponseBody
-    public Result permissionsList(@RequestParam Map<String,Object> map){
+    public Result roleList(@RequestParam Map<String,Object> map){
         if (StringUtils.isEmpty(map.get("pageNum"))||StringUtils.isEmpty(map.get("pageSize"))){
             return ResultGenerator.getFailResult("参数异常");
         }
-        PageInfo<Permission> permissions = permissionService.getPermissionPage(map);
-        return ResultGenerator.getSuccessResult(permissions);
+        PageInfo<Role> roles  = roleService.getRolePage(map);
+        return ResultGenerator.getSuccessResult(roles);
     }
 
     @PostMapping("/save")
     @ResponseBody
-    public Result savePermission(Permission permission){
-        String result = permissionService.savePermission(permission);
+    public Result savePermission(Role role){
+        String result = roleService.saveRole(role);
 //        if (permission.getPermissionId() == -1){
 //            permission.setPermissionId();
 //        }
@@ -50,10 +55,10 @@ public class PermissionController {
         return ResultGenerator.getSuccessResult("新增成功");
     }
 
-    @RequestMapping("/listWithoutPage")
+    @PostMapping("/getPermissions")
     @ResponseBody
-    public Result listWithoutPage(){
-        List<Permission> permissions = permissionService.getPermissionList();
-        return ResultGenerator.getSuccessResult(permissions);
+    public Result getPermissions(){
+        //String result = roleService.getRolePermissionsAndAllPermissions()；
+        return null;
     }
 }

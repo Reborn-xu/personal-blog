@@ -5,6 +5,7 @@
     <select id="findPermissionList" resultType="com.reborn.springboot.entity.Permission">
         SELECT * FROM tb_permission
         WHERE is_deleted=0
+        ORDER BY resource_type DESC
     </select>
 
     <insert id="insertPermission" parameterType="com.reborn.springboot.entity.Permission">

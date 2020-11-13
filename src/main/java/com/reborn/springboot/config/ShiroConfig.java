@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -28,6 +29,12 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
+
+        //自定义拦截器
+        Map<String,Filter> map = new LinkedHashMap<>();
+        map.put("requestURL",new URLPathMatchingFilter());
+        shiroFilterFactoryBean.setFilters(map);
+
         /**
          * 添加shiro内置的过滤器
          * shiro内置过滤器，可以实现权限相关的拦截器
@@ -43,13 +50,14 @@ public class ShiroConfig {
         filterMap.put("/admin/dist/**","anon");
         filterMap.put("/admin/plugins/**","anon");
         filterMap.put("/admin/loginCheck","anon");
-        filterMap.put("/admin/**","authc");
-
+        filterMap.put("/admin/login","anon");
+        filterMap.put("/admin","authc");
+        //filterMap.put("/admin/**","requestURL");
         //授权过滤器perms，role
-        filterMap.put("/admin/tags/**","perms[user:add]");
+        //filterMap.put("/admin/tags/**","perms[user:add]");
 
         shiroFilterFactoryBean.setLoginUrl("/admin/login");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/noauth");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/error/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }

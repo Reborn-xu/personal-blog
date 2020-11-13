@@ -24,6 +24,11 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
+    public List<Permission> getPermissionList() {
+        return permissionMapper.findPermissionList();
+    }
+
+    @Override
     public PageInfo<Permission> getPermissionPage(Map<String, Object> map) {
         int pageNum=Integer.parseInt((String)map.get("pageNum"));
         int pageSize=Integer.parseInt((String) map.get("pageSize"));

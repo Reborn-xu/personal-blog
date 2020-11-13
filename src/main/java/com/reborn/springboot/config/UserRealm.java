@@ -35,10 +35,9 @@ public class UserRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         //3、添加role信息
         authorizationInfo.addRole("admin");
+        //roleService.
         //4、添加permission信息
-        Set<String> permissions =new HashSet<>();
-        permissions.add("blogs:customer:add");
-        authorizationInfo.setStringPermissions(permissions);
+        //authorizationInfo.addStringPermission("/admin/blog");
         //authorizationInfo.
         return authorizationInfo;
     }

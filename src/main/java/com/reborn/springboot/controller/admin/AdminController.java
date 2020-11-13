@@ -45,8 +45,7 @@ public class AdminController {
             subject.login(token);
             User user=(User) subject.getPrincipal();
             session.setAttribute("user", user);
-            System.out.println("-- "+subject.hasRole("admin"));
-            System.out.println("-- "+subject.hasRole("customer"));
+            //subject.getSession().setAttribute();
         }catch (UnknownAccountException e) {
             //e.printStackTrace();
             //登录失败:用户名不存在
