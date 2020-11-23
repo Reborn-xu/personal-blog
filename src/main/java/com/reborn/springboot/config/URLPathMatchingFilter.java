@@ -31,7 +31,7 @@ public class URLPathMatchingFilter extends PathMatchingFilter {
         }
 
         //从session中读取当前用户的权限url列表
-        Set<String> urls = (Set<String>) subject.getSession();
+        Set<String> urls = (Set<String>) subject.getSession().getAttribute("urls");
         if (urls.contains(requestURL)){
             return true;
         }

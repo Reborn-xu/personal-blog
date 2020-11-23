@@ -43,7 +43,10 @@
                         </p>
                     </a>
                     </li>
-                <li class="nav-header">管理模块</li>
+
+                <shiro:hasAnyPermissions name="/admin/blogs,/admin/tags,/admin/comments,/admin/categories">
+                    <li class="nav-header">管理模块</li>
+
                     <shiro:hasPermission name="/admin/blogs">
                         <li class="nav-item">
                         <a th:href="@{/admin/blogs}" th:class="${path}=='blogs'?'nav-link active':'nav-link'">
@@ -54,62 +57,76 @@
                         </a>
                     </li>
                     </shiro:hasPermission>
-                    <li class="nav-item">
-                        <a th:href="@{/admin/comments}" th:class="${path}=='comments'?'nav-link active':'nav-link'">
-                            <i class="fa fa-comments nav-icon" aria-hidden="true"></i>
-                            <p>
-                                评论管理
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/admin/categories}" th:class="${path}=='categories'?'nav-link active':'nav-link'">
-                            <i class="fa fa-bookmark nav-icon" aria-hidden="true"></i>
-                            <p>
-                                分类管理
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/admin/tags}" th:class="${path}=='tags'?'nav-link active':'nav-link'">
-                            <i class="fa fa-tags nav-icon" aria-hidden="true"></i>
-                            <p>
-                                标签管理
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/admin/roles}" th:class="${path}=='roles'?'nav-link active':'nav-link'">
-                            <i class="fa fa-music nav-icon" aria-hidden="true"></i>
-                            <p>
-                                角色管理
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/admin/permissions}" th:class="${path}=='permissions'?'nav-link active':'nav-link'">
-                            <i class="fa fa-heart nav-icon" aria-hidden="true"></i>
-                            <p>
-                                权限管理
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
+                    <shiro:hasPermission name="/admin/comments">
+                        <li class="nav-item">
+                            <a th:href="@{/admin/comments}" th:class="${path}=='comments'?'nav-link active':'nav-link'">
+                                <i class="fa fa-comments nav-icon" aria-hidden="true"></i>
+                                <p>
+                                    评论管理
+                                </p>
+                            </a>
+                        </li>
+                    </shiro:hasPermission>
+
+                    <shiro:hasPermission name="/admin/categories">
+                        <li class="nav-item">
+                            <a th:href="@{/admin/categories}" th:class="${path}=='categories'?'nav-link active':'nav-link'">
+                                <i class="fa fa-bookmark nav-icon" aria-hidden="true"></i>
+                                <p>
+                                    分类管理
+                                </p>
+                            </a>
+                        </li>
+                    </shiro:hasPermission>
+
+                    <shiro:hasPermission name="/admin/tags">
+                        <li class="nav-item">
+                            <a th:href="@{/admin/tags}" th:class="${path}=='tags'?'nav-link active':'nav-link'">
+                                <i class="fa fa-tags nav-icon" aria-hidden="true"></i>
+                                <p>
+                                    标签管理
+                                </p>
+                            </a>
+                        </li>
+                    </shiro:hasPermission>
+
+
+                    <!--<li class="nav-item">
                         <a th:href="@{/admin/links}" th:class="${path}=='links'?'nav-link active':'nav-link'">
                             <i class="fa fa-heart nav-icon" aria-hidden="true"></i>
                             <p>
                                 友情链接
                             </p>
                         </a>
-                    </li>
-                    <li class="nav-header">系统管理</li>
-                    <li class="nav-item">
-                        <a th:href="@{/admin/configurations}"
-                           th:class="${path}=='configurations'?'nav-link active':'nav-link'">
-                            <i class="fa fa-wrench nav-icon"></i>
-                            <p>系统配置</p>
-                        </a>
-                    </li>
+                    </li>-->
+                </shiro:hasAnyPermissions>
+                    <shiro:hasRole name="admin">
+                        <li class="nav-header">系统管理</li>
+                        <li class="nav-item">
+                            <a th:href="@{/admin/roles}" th:class="${path}=='roles'?'nav-link active':'nav-link'">
+                                <i class="fa fa-music nav-icon" aria-hidden="true"></i>
+                                <p>
+                                    角色管理
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/admin/permissions}" th:class="${path}=='permissions'?'nav-link active':'nav-link'">
+                                <i class="fa fa-heart nav-icon" aria-hidden="true"></i>
+                                <p>
+                                    权限管理
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/admin/configurations}"
+                               th:class="${path}=='configurations'?'nav-link active':'nav-link'">
+                                <i class="fa fa-wrench nav-icon"></i>
+                                <p>系统配置</p>
+                            </a>
+                        </li>
+                    </shiro:hasRole>
+
                 <li class="nav-header">安全管理</li>
                 <li class="nav-item">
                     <a th:href="@{/admin/profile}"

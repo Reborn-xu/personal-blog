@@ -1,5 +1,6 @@
 package com.reborn.springboot.config;
 
+import com.reborn.springboot.entity.Permission;
 import com.reborn.springboot.entity.User;
 import com.reborn.springboot.service.RoleService;
 import com.reborn.springboot.service.UserService;
@@ -11,6 +12,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UserRealm extends AuthorizingRealm {
@@ -34,11 +36,14 @@ public class UserRealm extends AuthorizingRealm {
         //2、创建AuthorizationInfo对象
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         //3、添加role信息
-        authorizationInfo.addRole("admin");
-        //roleService.
+        authorizationInfo.addRole(roleService.getRoleByPrimary(user.getRoleId()).getRoleName());
         //4、添加permission信息
-        //authorizationInfo.addStringPermission("/admin/blog");
-        //authorizationInfo.
+        List<Permission> permissions = roleService.getPermissionsByRoleId(user.getRoleId());
+        Set<String> urls = new HashSet<>();
+        for (Permission permission:permissions){
+            urls.add(permission.getPermissionUrl());
+        }
+        authorizationInfo.setStringPermissions(urls);
         return authorizationInfo;
     }
 

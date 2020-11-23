@@ -22,7 +22,7 @@ public class User implements Serializable{
 
     private Integer roleId;
 
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 

@@ -167,3 +167,25 @@ function getSelectedRows() {
     }
     return grid.getGridParam("selarrrow");
 }
+
+/**
+ * 获取jqGridPermissions表格所有数据
+ * @returns {any[]}
+ */
+function getJQAllData() {
+//拿到grid对象
+    var obj = $("#jqGridPermissions");
+    var rows = obj.jqGrid('getRowData'); //获取当前显示的记录
+    console.log(rows);
+//获取grid表中所有的rowid值
+    var rowIds = obj.getDataIDs();
+//初始化一个数组arrayData容器，用来存放rowData
+    var arrayData = new Array();
+    if (rowIds.length > 0) {
+        for (var i = 0; i < rowIds.length; i++) {
+            //rowData=obj.getRowData(rowid);//这里rowid=rowIds[i];
+            arrayData.push(obj.getRowData(rowIds[i]));
+        }
+    }
+    return arrayData;
+}

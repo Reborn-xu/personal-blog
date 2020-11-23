@@ -4,17 +4,18 @@ import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class ExceptionHandleController {
 
     @ExceptionHandler({UnauthorizedException.class})
-    public String handleShiroException(){
-        return "redirect:error/403";
+    public ModelAndView handleShiroException(UnauthorizedException u){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("msg",u.getMessage());
+        modelAndView.setViewName("error/403");
+        return modelAndView;
     }
 
-    @RequestMapping("/403")
-    public String error403(){
-        return "error/403";
-    }
+
 }

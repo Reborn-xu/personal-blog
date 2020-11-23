@@ -51,10 +51,14 @@ public class ShiroConfig {
         filterMap.put("/admin/plugins/**","anon");
         filterMap.put("/admin/loginCheck","anon");
         filterMap.put("/admin/login","anon");
+        filterMap.put("/admin/logout","anon");
+        filterMap.put("/admin/profile","anon");
+        filterMap.put("/admin/blogs/edit","anon");
+        filterMap.put("/admin/index","anon");
         filterMap.put("/admin","authc");
-        //filterMap.put("/admin/**","requestURL");
+        filterMap.put("/admin/**","requestURL");
         //授权过滤器perms，role
-        //filterMap.put("/admin/tags/**","perms[user:add]");
+
 
         shiroFilterFactoryBean.setLoginUrl("/admin/login");
         shiroFilterFactoryBean.setUnauthorizedUrl("/error/403");

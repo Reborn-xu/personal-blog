@@ -87,7 +87,11 @@ function editBlog() {
     window.location.href = "/admin/blogs/edit/" + id;
 }
 
+/**
+ * 编辑角色权限
+ */
 function editPermissionToRole() {
+    $("#jqGridPermissions").trigger("reloadGrid");
     var id = getSelectedRow();
     if (id == null) {
         return;
@@ -120,8 +124,44 @@ function editPermissionToRole() {
         gridComplete: function () {
             //隐藏grid底部滚动条
             $("#jqGridPermissions").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
+        },
+        loadComplete:function () {
+            var allPermissions = getJQAllData();
+            var roleId = getSelectedRowWithoutAlert();
+            $.ajax({
+                type: "GET",
+                url: "/admin/roles/getPermissions",
+                data: {"roleId":roleId},
+                success: function (r) {
+                    if (r.resultCode == 200) {
+                        // $("#jqGrid").trigger("reloadGrid");
+                        var result = r.data;
+                        //alert(r.data[0].permissionName);
+                        for (var i = 0; i < allPermissions.length; i++){
+                            var permission = allPermissions[i].permissionId;
+                            //alert(permission);
+                            for (var k = 0; k < result.length;k++){
+                                if (permission == result[k].permissionId){
+                                    //alert("checked");
+                                    $("#jqGridPermissions").jqGrid("setSelection", permission, false);
+                                }
+                            }
+                        }
+
+                    } else {
+                        swal(r.message, {
+                            icon: "error",
+                        });
+                    }
+                }
+            });
+            //alert(allPermissions);
+
+
         }
     });
+
+
     $('.modal-title').html('编辑权限');
     $('#categoryModal2').modal('show');
 }
@@ -216,3 +256,47 @@ $('#saveButton').click(function () {
         });
     }
 });
+
+$('#updatePermission').click(function () {
+    var permissions = getSelectedPermissions();
+    alert(permissions);
+    var roleId = getSelectedRowWithoutAlert();
+    alert("roleId"+roleId);
+    permissions.push(roleId);
+    alert(permissions);
+    $.ajax({
+        type: "POST",
+        url: "/admin/roles/updatePermissions",
+        contentType: "application/json",
+        data: JSON.stringify(permissions),
+        //data: {"permissions":permissionIds,"roleId":roleId},
+        success: function (r) {
+            if (r.resultCode == 200) {
+                swal(r.message, {
+                    icon: "success",
+                });
+                $("#jqGridPermissions").trigger("reloadGrid");
+            } else {
+                swal(r.message, {
+                    icon: "error",
+                });
+            }
+        }
+    });
+});
+
+/**
+ * 获取jqGrid选中的多条记录
+ * @returns {*}
+ */
+function getSelectedPermissions() {
+    var grid = $("#jqGridPermissions");
+    var rowKey = grid.getGridParam("selrow");
+    /*if (!rowKey) {
+        swal("请选择一条记录", {
+            icon: "warning",
+        });
+        return;
+    }*/
+    return grid.getGridParam("selarrrow");
+}

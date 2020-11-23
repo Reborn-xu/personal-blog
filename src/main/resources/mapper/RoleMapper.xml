@@ -7,4 +7,19 @@
         WHERE is_deleted=0
     </select>
 
+    <select id="getPermissionsByRoleId" parameterType="java.lang.Integer"
+            resultType="com.reborn.springboot.entity.Permission">
+        select b.*
+        from tb_role_permission_ref a,tb_permission b
+        where
+        a.permission_id=b.permission_id
+        and a.role_Id=#{roleId}
+    </select>
+
+    <select id="getRoleByPrimary" parameterType="java.lang.Integer"
+            resultType="com.reborn.springboot.entity.Role">
+        select * from tb_role
+        where role_id=#{roleId}
+        and  is_deleted=0
+    </select>
 </mapper>
