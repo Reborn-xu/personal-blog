@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reborn.springboot.dao.RolePermissionRefMapper">
+
+    <select id="getByRoleId" parameterType="java.lang.Integer"
+            resultType="com.reborn.springboot.entity.RolePermissionRef">
+      SELECT * FROM tb_role_permission_ref
+      WHERE role_id=#{roleId} AND is_deleted=0
+    </select>
+
+    <delete id="deleteRolePermissionsByRoleId" parameterType="java.lang.Integer">
+        delete from tb_role_permission_ref
+        where role_id=#{roleId}
+    </delete>
+
+    <insert id="insertRolePermissions" parameterType="java.lang.Integer">
+        insert into tb_role_permission_ref
+        (role_id,permission_id)
+        values
+        <foreach collection="permissions" separator="," item="item" >
+            <if test="item!=null">
+                (#{roleId},#{item})
+            </if>
+        </foreach>
+    </insert>
+</mapper>
