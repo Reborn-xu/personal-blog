@@ -30,7 +30,7 @@ public class User implements Serializable{
         this.roleId = roleId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
