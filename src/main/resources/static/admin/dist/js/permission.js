@@ -29,6 +29,7 @@ $(function () {
             rows: "pageSize",
             order: "order",
         },
+        viewrecords:true,
         gridComplete: function () {
             //隐藏grid底部滚动条
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
