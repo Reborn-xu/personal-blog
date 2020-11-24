@@ -145,7 +145,8 @@ $('#saveButton').click(function () {
     var blogCategoryId = $('#blogCategoryId').val();
     var blogTags = $('#blogTags').val();
     var blogContent = blogEditor.getMarkdown();
-    var blogCoverImage = $('#blogCoverImage')[0].src;
+    //var blogCoverImage = $('#blogCoverImage')[0].src;
+    var blogCoverImage = $("#blogCoverImage").attr("src");
     var blogStatus = $("input[name='blogStatus']:checked").val();
     var enableComment = $("input[name='enableComment']:checked").val();
     if (isNull(blogCoverImage) || blogCoverImage.indexOf('img-upload') != -1) {

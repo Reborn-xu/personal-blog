@@ -11,6 +11,7 @@ import com.reborn.springboot.entity.Blog;
 import com.reborn.springboot.entity.BlogCategory;
 import com.reborn.springboot.entity.BlogTag;
 import com.reborn.springboot.entity.BlogTagRelation;
+import com.reborn.springboot.entity.vo.BlogDetailVO;
 import com.reborn.springboot.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,28 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogTagRelationMapper blogTagRelationMapper;
+
+    /**
+     * 前台获取博客信息
+     * @param blogId
+     * @return
+     */
+    @Override
+    public BlogDetailVO getBlogDetailVOByPrimary(Long blogId) {
+        Blog blog = blogMapper.getBlogByPrimary(blogId);
+        getBlogDetailVO(blog);
+        return null;
+    }
+
+    /**
+     * 前台获取博客vo信息
+     * @param blog
+     * @return
+     */
+    private BlogDetailVO getBlogDetailVO(Blog blog) {
+
+        return null;
+    }
 
     @Override
     public PageInfo<Blog> getBlogsPage(Map<String,Object> map) {

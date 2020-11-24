@@ -2,6 +2,7 @@ package com.reborn.springboot.service;
 
 import com.github.pagehelper.PageInfo;
 import com.reborn.springboot.entity.Blog;
+import com.reborn.springboot.entity.vo.BlogDetailVO;
 
 import java.util.List;
 import java.util.Map;
@@ -16,4 +17,6 @@ public interface BlogService {
     String updateBlog(Blog blog);
 
     String deleteBlogs(Integer[] ids);
+
+    BlogDetailVO getBlogDetailVOByPrimary(Long blogId);
 }

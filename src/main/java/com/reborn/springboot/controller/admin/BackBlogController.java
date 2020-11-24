@@ -38,7 +38,7 @@ public class BackBlogController {
     }
 
     /**
-     * 全部博客信息
+     * 全部博客信息（分页信息）
      * @param map
      * @return
      */
@@ -53,7 +53,7 @@ public class BackBlogController {
     }
 
     /**
-     * 用户的所有博客
+     * 用户的所有博客（分页信息）
      * @param map
      * @return
      */
@@ -67,23 +67,25 @@ public class BackBlogController {
         return ResultGenerator.getSuccessResult(blogs);
     }
 
+
+    /*@GetMapping("/blogs/edit")
+    public String editBlog(Model model){
+        model.addAttribute("path","edit");
+        model.addAttribute("categories",categoryService.getCategoryList());
+        return "admin/edit";
+    }*/
     /**
      * 跳转到发布博客页面
      * @param model
      * @return
      */
     @GetMapping("/blogs/edit")
-    public String editBlog(Model model){
+    public String editBlog(@RequestParam(value = "blogId",required = false) Long blogId,Model model){
         model.addAttribute("path","edit");
         model.addAttribute("categories",categoryService.getCategoryList());
-        return "admin/edit";
-    }
-
-    @GetMapping("/blogs/edit/{blogId}")
-    public String editBlog(@PathVariable("blogId") Long blogId,Model model){
-        model.addAttribute("path","edit");
-        model.addAttribute("categories",categoryService.getCategoryList());
-        model.addAttribute("blog", blogService.getBlogByPrimary(blogId));
+        if (blogId!=null){
+            model.addAttribute("blog", blogService.getBlogByPrimary(blogId));
+        }
         return "admin/edit";
     }
 
@@ -101,6 +103,11 @@ public class BackBlogController {
         return ResultGenerator.getSuccessResult("新增成功");
     }
 
+    /**
+     * 修改博客
+     * @param blog
+     * @return
+     */
     @PostMapping("/blogs/update")
     @ResponseBody
     public Result updateBlog(Blog blog){
@@ -111,9 +118,14 @@ public class BackBlogController {
         return ResultGenerator.getSuccessResult("修改成功");
     }
 
+    /**
+     * 删除博客
+     * @param ids
+     * @return
+     */
     @PostMapping("/blogs/delete")
     @ResponseBody
-    @RequiresRoles(value = "admin")
+    //@RequiresRoles(value = "admin")
     public Result deleteBlogs(@RequestBody Integer[] ids){
         String result = blogService.deleteBlogs(ids);
         if (!result.equals("success")){

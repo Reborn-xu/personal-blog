@@ -98,7 +98,9 @@ function editBlog() {
     if (id == null) {
         return;
     }
-    window.location.href = "/admin/blogs/edit/" + id;
+    //window.location.href = "/admin/blogs/edit/" + id;
+    window.location.href = "/admin/blogs/edit?blogId="+id;
+    //$.get("/admin/blogs/edit",id);
 }
 
 function deleteBlog() {
