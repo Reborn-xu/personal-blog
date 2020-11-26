@@ -19,4 +19,6 @@ public interface BlogService {
     String deleteBlogs(Integer[] ids);
 
     BlogDetailVO getBlogDetailVOByPrimary(Long blogId);
+
+    Integer updateBlogViews(Long blogId);
 }

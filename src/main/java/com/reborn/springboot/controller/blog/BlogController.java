@@ -2,12 +2,14 @@ package com.reborn.springboot.controller.blog;
 
 import com.github.pagehelper.PageInfo;
 import com.reborn.springboot.entity.Blog;
+import com.reborn.springboot.entity.vo.BlogDetailVO;
 import com.reborn.springboot.service.BlogService;
 import com.reborn.springboot.service.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,8 +60,22 @@ public class BlogController {
     }
 
     @RequestMapping("/blog/{blogId}")
-    public String detail(@PathVariable Long blogId,HttpServletRequest request){
-        request.setAttribute("blogDetailVO",blogService.getBlogDetailVOByPrimary(blogId));
+    public String detail(@PathVariable Long blogId, HttpServletRequest request,
+                         @RequestParam(name = "commentPage",required = false,defaultValue = "1")Integer commentPage){
+        //获取博客信息
+        BlogDetailVO blogDetailVO = blogService.getBlogDetailVOByPrimary(blogId);
+        if (blogDetailVO==null){
+            //找不到博客，返回404
+
+        }
+        //博客内容
+        request.setAttribute("blogDetailVO",blogDetailVO);
+        //评论列表
+
+        //浏览量+1
+        blogService.updateBlogViews(blogId);
+
+        //配置项
         request.setAttribute("configurations",configurationService.getAllConfigurations());
         request.setAttribute("pageName","博客详情");
         return "/blog/" + indexName + "/detail";

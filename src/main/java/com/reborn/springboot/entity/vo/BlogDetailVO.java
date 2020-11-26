@@ -124,4 +124,22 @@ public class BlogDetailVO implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "BlogDetailVO{" +
+                "blogId=" + blogId +
+                ", blogTitle='" + blogTitle + '\'' +
+                ", blogCategoryId=" + blogCategoryId +
+                ", commentCount=" + commentCount +
+                ", blogCategoryIcon='" + blogCategoryIcon + '\'' +
+                ", blogCategoryName='" + blogCategoryName + '\'' +
+                ", blogCoverImage='" + blogCoverImage + '\'' +
+                ", blogViews=" + blogViews +
+                ", blogTags=" + blogTags +
+                ", blogContent='" + blogContent + '\'' +
+                ", enableComment=" + enableComment +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

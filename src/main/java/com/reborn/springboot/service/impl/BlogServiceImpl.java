@@ -13,15 +13,13 @@ import com.reborn.springboot.entity.BlogTag;
 import com.reborn.springboot.entity.BlogTagRelation;
 import com.reborn.springboot.entity.vo.BlogDetailVO;
 import com.reborn.springboot.service.BlogService;
+import com.reborn.springboot.utils.MarkDownUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -59,7 +57,21 @@ public class BlogServiceImpl implements BlogService {
     private BlogDetailVO getBlogDetailVO(Blog blog) {
         if (blog!=null){
             BlogDetailVO blogDetailVO = new BlogDetailVO();
+            //深拷贝blog到blogetailvo
             BeanUtils.copyProperties(blog,blogDetailVO);
+            //设置blogContent的markdown格式转换
+            blogDetailVO.setBlogContent(MarkDownUtil.mdToHtml(blogDetailVO.getBlogContent()));
+            //设置blogTags
+            if (blog.getBlogTags()!=null){
+                List<String> tags = Arrays.asList(blog.getBlogTags().split(","));
+                blogDetailVO.setBlogTags(tags);
+            }
+            //设置categoryIcon，分类图标
+            BlogCategory category = categoryMapper.findCategoryById(blogDetailVO.getBlogCategoryId());
+            blogDetailVO.setBlogCategoryIcon(category.getCategoryIcon());
+            //设置commentCount
+
+
             return blogDetailVO;
         }
         return null;
@@ -72,6 +84,12 @@ public class BlogServiceImpl implements BlogService {
         PageHelper.startPage(pageNum, pageSize);
         List<Blog> blogList = blogMapper.findBlogList();
         return new PageInfo<Blog>(blogList);
+    }
+
+    @Override
+    public Integer updateBlogViews(Long blogId) {
+
+        return null;
     }
 
     @Override
