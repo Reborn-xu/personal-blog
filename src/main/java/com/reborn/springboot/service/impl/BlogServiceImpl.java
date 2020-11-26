@@ -13,6 +13,7 @@ import com.reborn.springboot.entity.BlogTag;
 import com.reborn.springboot.entity.BlogTagRelation;
 import com.reborn.springboot.entity.vo.BlogDetailVO;
 import com.reborn.springboot.service.BlogService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,8 +47,8 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogDetailVO getBlogDetailVOByPrimary(Long blogId) {
         Blog blog = blogMapper.getBlogByPrimary(blogId);
-        getBlogDetailVO(blog);
-        return null;
+        BlogDetailVO blogDetailVO = getBlogDetailVO(blog);
+        return blogDetailVO;
     }
 
     /**
@@ -56,7 +57,11 @@ public class BlogServiceImpl implements BlogService {
      * @return
      */
     private BlogDetailVO getBlogDetailVO(Blog blog) {
-
+        if (blog!=null){
+            BlogDetailVO blogDetailVO = new BlogDetailVO();
+            BeanUtils.copyProperties(blog,blogDetailVO);
+            return blogDetailVO;
+        }
         return null;
     }
 

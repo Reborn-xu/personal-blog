@@ -59,7 +59,7 @@ public class BlogController {
 
     @RequestMapping("/blog/{blogId}")
     public String detail(@PathVariable Long blogId,HttpServletRequest request){
-        blogService.getBlogDetailVOByPrimary(blogId);
+        request.setAttribute("blogDetailVO",blogService.getBlogDetailVOByPrimary(blogId));
         request.setAttribute("configurations",configurationService.getAllConfigurations());
         request.setAttribute("pageName","博客详情");
         return "/blog/" + indexName + "/detail";
