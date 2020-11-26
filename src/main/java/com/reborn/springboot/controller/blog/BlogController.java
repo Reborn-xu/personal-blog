@@ -72,9 +72,6 @@ public class BlogController {
         request.setAttribute("blogDetailVO",blogDetailVO);
         //评论列表
 
-        //浏览量+1
-        blogService.updateBlogViews(blogId);
-
         //配置项
         request.setAttribute("configurations",configurationService.getAllConfigurations());
         request.setAttribute("pageName","博客详情");

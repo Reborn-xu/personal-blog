@@ -20,5 +20,4 @@ public interface BlogService {
 
     BlogDetailVO getBlogDetailVOByPrimary(Long blogId);
 
-    Integer updateBlogViews(Long blogId);
 }

@@ -29,7 +29,7 @@
 
     <select id="getBlogByPrimary" parameterType="Long" resultType="com.reborn.springboot.entity.Blog">
         select * from tb_blog
-        where blog_id=#{blogId}
+        where blog_id=#{blogId} and is_deleted=0
     </select>
 
     <update id="updateBlogByPrimary" parameterType="com.reborn.springboot.entity.Blog">

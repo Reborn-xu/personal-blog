@@ -55,7 +55,9 @@ public class BlogServiceImpl implements BlogService {
      * @return
      */
     private BlogDetailVO getBlogDetailVO(Blog blog) {
-        if (blog!=null){
+        if (blog!=null&&blog.getBlogStatus()==1){
+            //更新blogviews
+
             BlogDetailVO blogDetailVO = new BlogDetailVO();
             //深拷贝blog到blogetailvo
             BeanUtils.copyProperties(blog,blogDetailVO);
@@ -84,12 +86,6 @@ public class BlogServiceImpl implements BlogService {
         PageHelper.startPage(pageNum, pageSize);
         List<Blog> blogList = blogMapper.findBlogList();
         return new PageInfo<Blog>(blogList);
-    }
-
-    @Override
-    public Integer updateBlogViews(Long blogId) {
-
-        return null;
     }
 
     @Override
