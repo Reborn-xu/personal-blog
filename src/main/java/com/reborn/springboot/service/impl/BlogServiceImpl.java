@@ -56,7 +56,9 @@ public class BlogServiceImpl implements BlogService {
      */
     private BlogDetailVO getBlogDetailVO(Blog blog) {
         if (blog!=null&&blog.getBlogStatus()==1){
-            //更新blogviews
+            //更新blogviews,访问量+1
+            blog.setBlogViews(blog.getBlogViews()+1);
+            blogMapper.updateBlogByPrimary(blog);
 
             BlogDetailVO blogDetailVO = new BlogDetailVO();
             //深拷贝blog到blogetailvo
