@@ -23,19 +23,19 @@ $(function () {
         pager: "#jqGridPager",
         jsonReader: {
             root: "data.list",
-            page: "data.currPage",
-            total: "data.totalPage",
-            records: "data.totalCount"
+            page: "data.pageNum",
+            total: "data.pages",
+            records: "data.total"
         },
         prmNames: {
-            page: "page",
-            rows: "limit",
+            page: "pageNum",
+            rows: "pageSize",
             order: "order",
         },
         gridComplete: function () {
             //隐藏grid底部滚动条
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+        },
     });
     $(window).resize(function () {
         $("#jqGrid").setGridWidth($(".card-body").width());

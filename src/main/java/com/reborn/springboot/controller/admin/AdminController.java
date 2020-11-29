@@ -101,7 +101,7 @@ public class AdminController {
             model.addAttribute("msg","账号锁定");
             return "/admin/login";
         }
-        return "admin/index";
+        return "redirect:admin/index";
     }
 
     @RequestMapping("/logout")

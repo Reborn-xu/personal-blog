@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reborn.springboot.dao.CommentMapper">
+
+    <select id="findCommentList" resultType="com.reborn.springboot.entity.BlogComment">
+        select * from tb_blog_comment
+        where is_deleted=0
+    </select>
+
+    <insert id="insertComment" parameterType="com.reborn.springboot.entity.BlogComment">
+        INSERT INTO tb_blog_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="commentId!=null">comment_id,</if>
+            <if test="blogId!=null">blog_id,</if>
+            <if test="commentator!=null">commentator,</if>
+            <if test="email!=null">email,</if>
+            <if test="commentBody!=null">comment_body,</if>
+            <if test="isDeleted!=null">is_deleted,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="commentId!=null">#{commentId},</if>
+            <if test="blogId!=null">#{blogId},</if>
+            <if test="commentator!=null">#{commentator},</if>
+            <if test="email!=null">#{email},</if>
+            <if test="commentBody!=null">#{commentBody},</if>
+            <if test="isDeleted!=null">#{isDeleted},</if>
+        </trim>
+    </insert>
+
+</mapper>

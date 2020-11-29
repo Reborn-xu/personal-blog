@@ -2,14 +2,16 @@ package com.reborn.springboot.controller.blog;
 
 import com.github.pagehelper.PageInfo;
 import com.reborn.springboot.entity.Blog;
+import com.reborn.springboot.entity.BlogComment;
+import com.reborn.springboot.entity.Result;
 import com.reborn.springboot.entity.vo.BlogDetailVO;
 import com.reborn.springboot.service.BlogService;
+import com.reborn.springboot.service.CommentService;
 import com.reborn.springboot.service.ConfigurationService;
+import com.reborn.springboot.utils.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,9 @@ public class BlogController {
 
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private CommentService commentService;
 
     /**
      * 博客首页
@@ -59,6 +64,13 @@ public class BlogController {
         return "/blog/"+indexName+"/index";
     }
 
+    /**
+     * 前台博客内容
+     * @param blogId
+     * @param request
+     * @param commentPage
+     * @return
+     */
     @RequestMapping("/blog/{blogId}")
     public String detail(@PathVariable Long blogId, HttpServletRequest request,
                          @RequestParam(name = "commentPage",required = false,defaultValue = "1")Integer commentPage){
@@ -76,5 +88,20 @@ public class BlogController {
         request.setAttribute("configurations",configurationService.getAllConfigurations());
         request.setAttribute("pageName","博客详情");
         return "/blog/" + indexName + "/detail";
+    }
+
+    /**
+     * 前台博客 评论提交
+     * @param blogComment
+     * @return
+     */
+    @PostMapping("/blog/comment")
+    @ResponseBody
+    public Result saveComment(BlogComment blogComment){
+        String result = commentService.saveComment(blogComment);
+        if (!result.equals("success")){
+            return ResultGenerator.getFailResult("评论失败");
+        }
+        return ResultGenerator.getSuccessResult("评论成功");
     }
 }

@@ -145,9 +145,9 @@
             <h2><i class="fa fa-pencil"></i> 添加评论</h2>
             <table id="commentForm" class="form">
                 <tbody>
-                <tr>
+                <!--<tr>
                     <td>
-                        <input type="hidden" id="blogId" name="blogId" th:value="${blogDetailVO.blogId}"></input>
+
                         <input type="text" name="commentator" id="commentator" placeholder="(*必填)怎么称呼你?">
                     </td>
                 </tr>
@@ -169,9 +169,13 @@
                              th:src="@{/common/kaptcha}"
                              onclick="this.src='/common/kaptcha?d='+new Date()*1">
                     </td>
-                </tr>
+                </tr>-->
                 <tr>
                     <td>
+                        <input type="hidden" id="blogId" name="blogId" th:value="${blogDetailVO.blogId}"></input>
+                        <input type="hidden" id="userId" name="userId" th:value="${session.user.userId}"></input>
+                        <input type="hidden" id="commentator" name="commentator" th:value="${session.user.nickName}"></input>
+                        <input type="hidden" id="email" name="email" th:value="${session.user.email}"></input>
                         <textarea rows="5" name="commentBody" id="commentBody" placeholder="(*必填)请输入你的评论"></textarea>
                     </td>
                 </tr>
