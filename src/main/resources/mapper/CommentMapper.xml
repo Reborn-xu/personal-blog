@@ -5,6 +5,7 @@
     <select id="findCommentList" resultType="com.reborn.springboot.entity.BlogComment">
         select * from tb_blog_comment
         where is_deleted=0
+        order by comment_create_time desc
     </select>
 
     <insert id="insertComment" parameterType="com.reborn.springboot.entity.BlogComment">

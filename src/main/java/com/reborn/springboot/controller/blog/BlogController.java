@@ -73,7 +73,8 @@ public class BlogController {
      */
     @RequestMapping("/blog/{blogId}")
     public String detail(@PathVariable Long blogId, HttpServletRequest request,
-                         @RequestParam(name = "commentPage",required = false,defaultValue = "1")Integer commentPage){
+                         @RequestParam(name = "commentPage",required = false,defaultValue = "1")String commentPage,
+                         @RequestParam(required = false,defaultValue = "5")String commentSize){
         //获取博客信息
         BlogDetailVO blogDetailVO = blogService.getBlogDetailVOByPrimary(blogId);
         if (blogDetailVO==null){
@@ -83,7 +84,10 @@ public class BlogController {
         //博客内容
         request.setAttribute("blogDetailVO",blogDetailVO);
         //评论列表
-
+        Map<String,Object> map = new HashMap<>();
+        map.put("pageNum",commentPage);
+        map.put("pageSize",commentSize);
+        request.setAttribute("commentPageResult", commentService.getCommentsPage(map));
         //配置项
         request.setAttribute("configurations",configurationService.getAllConfigurations());
         request.setAttribute("pageName","博客详情");

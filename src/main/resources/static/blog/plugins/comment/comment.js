@@ -13,7 +13,7 @@ $('#commentSubmit').click(function () {
         return;
     }
     if (isNull(userId)) {
-        swal("参数异常", {
+        swal("请先登录", {
             icon: "warning",
         });
         return;
@@ -64,6 +64,7 @@ $('#commentSubmit').click(function () {
                 });
                 $('#commentBody').val('');
                 //$('#verifyCode').val('');
+                location.reload();
             }
             else {
                 swal(result.message, {
