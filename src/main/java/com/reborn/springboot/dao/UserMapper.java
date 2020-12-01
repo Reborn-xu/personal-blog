@@ -4,4 +4,6 @@ import com.reborn.springboot.entity.User;
 
 public interface UserMapper {
     User getUserByUsername(String username);
+
+    int insertUser(User user);
 }

@@ -1,8 +1,11 @@
 package com.reborn.springboot.controller.admin;
 
 import com.reborn.springboot.entity.Permission;
+import com.reborn.springboot.entity.Result;
 import com.reborn.springboot.entity.User;
 import com.reborn.springboot.service.RoleService;
+import com.reborn.springboot.service.UserService;
+import com.reborn.springboot.utils.ResultGenerator;
 import org.apache.catalina.Session;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -30,6 +33,9 @@ public class AdminController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 后台首页
@@ -104,6 +110,11 @@ public class AdminController {
         return "redirect:/admin/index";
     }
 
+    /**
+     * 登出
+     * @param session
+     * @return
+     */
     @RequestMapping("/logout")
     public String logout(HttpSession session){
         //1、获取subject
@@ -111,6 +122,25 @@ public class AdminController {
         subject.logout();
         //session.invalidate();
         return "redirect:/";
+    }
+
+    /**
+     * 跳到注册页面
+     * @return
+     */
+    @GetMapping("/register")
+    public String register(){
+        return "/admin/register";
+    }
+
+    @PostMapping("/registerCheck")
+    public String registerCheck(User user,Model model){
+        String result = userService.registerUser(user);
+        if (result.equals("success")){
+            return "redirect:/admin/login";
+        }
+        model.addAttribute("errorMsg2","注册失败");
+        return "/admin/register";
     }
 
     @RequestMapping("/profile")

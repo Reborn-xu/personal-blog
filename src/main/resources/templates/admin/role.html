@@ -62,7 +62,7 @@
         </div>
         <!-- /.content -->
         <div class="content">
-            <!-- 模态框（Modal） -->
+            <!-- 角色添加-模态框（Modal） -->
             <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -78,21 +78,16 @@
                                         错误信息展示栏。
                                     </div>
                                 </div>
-                                <input type="hidden" class="form-control" id="permissionId" name="permissionId">
+                                <input type="hidden" class="form-control" id="roleId" name="roleId">
                                 <div class="form-group">
-                                    <label for="permissionName" class="control-label">权限名称:</label>
+                                    <label for="permissionName" class="control-label">角色名称:</label>
                                     <input type="text" class="form-control" id="permissionName" name="permissionName"
-                                           placeholder="请输入权限名称" required="true">
+                                           placeholder="请输入角色名称" required="true">
                                 </div>
                                 <div class="form-group">
-                                    <label for="permissionUrl" class="control-label">url:</label>
+                                    <label for="permissionUrl" class="control-label">角色描述:</label>
                                     <input type="text" class="form-control" id="permissionUrl" name="permissionUrl"
-                                           placeholder="请输入URL" required="true">
-                                </div>
-                                <div class="form-group">
-                                    <label for="resourceType" class="control-label">类型:</label>
-                                    <input type="text" class="form-control" id="resourceType" name="resourceType"
-                                           placeholder="请输入类型" required="true">
+                                           placeholder="请输入角色描述" required="true">
                                 </div>
                                 <!--<div class="form-group">-->
                                 <!--<label for="categoryIcon" class="control-label">分类图标:</label>-->
@@ -131,7 +126,7 @@
                 </div>
             </div>
             <!-- /.modal -->
-            <!-- 模态框（Modal） -->
+            <!-- 角色权限-模态框（Modal） -->
             <div class="modal fade" id="categoryModal2" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">

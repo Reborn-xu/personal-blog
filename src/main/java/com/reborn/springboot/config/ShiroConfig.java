@@ -50,7 +50,9 @@ public class ShiroConfig {
         filterMap.put("/admin/dist/**","anon");
         filterMap.put("/admin/plugins/**","anon");
         filterMap.put("/admin/loginCheck","anon");
+        filterMap.put("/admin/registerCheck","anon");
         filterMap.put("/admin/login","anon");
+        filterMap.put("/admin/register","anon");
         filterMap.put("/admin/logout","anon");
         filterMap.put("/admin/profile","anon");
         //filterMap.put("/admin/blogs/edit","anon");

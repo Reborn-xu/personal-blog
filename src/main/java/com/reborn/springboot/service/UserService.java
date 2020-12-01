@@ -4,4 +4,6 @@ import com.reborn.springboot.entity.User;
 
 public interface UserService {
     User loginCheck(String username);
+
+    String registerUser(User user);
 }

@@ -17,4 +17,23 @@
 
     </select>
 
+    <insert id="insertUser" parameterType="com.reborn.springboot.entity.User"
+            useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id">
+        insert into tb_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username!=null">username,</if>
+            <if test="password!=null">password,</if>
+            <if test="nickName!=null">nick_name,</if>
+            <if test="email!=null">email,</if>
+            <if test="roleId!=null">role_id,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username!=null">#{username},</if>
+            <if test="password!=null">#{password},</if>
+            <if test="nickName!=null">#{nickName},</if>
+            <if test="email!=null">#{email},</if>
+            <if test="roleId!=null">#{roleId},</if>
+        </trim>
+    </insert>
 </mapper>

@@ -39,9 +39,9 @@
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">your personal blog , enjoy it</p>
-            <form th:action="@{/admin/loginCheck}" method="post">
-                <div th:if="${not #strings.isEmpty(session.errorMsg)}" class="form-group">
-                    <div class="alert alert-danger" th:text="${session.errorMsg}"></div>
+            <form th:action="@{/admin/registerCheck}" method="post">
+                <div th:if="${not #strings.isEmpty(session.errorMsg2)}" class="form-group">
+                    <div class="alert alert-danger" th:text="${session.errorMsg2}"></div>
                 </div>
                 <div class="form-group has-feedback">
                     <span class="fa fa-user form-control-feedback"></span>
@@ -51,6 +51,21 @@
                 <div class="form-group has-feedback">
                     <span class="fa fa-lock form-control-feedback"></span>
                     <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码"
+                           required="true">
+                </div>
+                <div class="form-group has-feedback">
+                    <span class="fa fa-lock form-control-feedback"></span>
+                    <input type="password" id="repassword" name="repassword" class="form-control" placeholder="请再输入密码"
+                           required="true">
+                </div>
+                <div class="form-group has-feedback">
+                    <span class="fa fa-user form-control-feedback"></span>
+                    <input type="text" id="nickName" name="nickName" class="form-control" placeholder="请再输入昵称"
+                           required="true">
+                </div>
+                <div class="form-group has-feedback">
+                    <span class="fa fa-envelope-o form-control-feedback"></span>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="请输入邮箱"
                            required="true">
                 </div>
                 <!--<div class="row">
@@ -64,18 +79,14 @@
                 </div>-->
                 <div class="form-group has-feedback"></div>
                 <div class="row">
-                    <!--<div class="col-8">
-                    </div>-->
+                    <div class="col-8">
+                    </div>
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">登录
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">注册
                         </button>
                     </div>
                     <div class="col-4">
-                        <button onclick="window.location.href='/admin/register'" type="button" class="btn btn-primary btn-block btn-flat">注册
-                        </button>
-                    </div>
-                    <div class="col-4">
-                        <button onclick="window.location.href='/'" type="button" class="btn btn-primary btn-block btn-flat">首页
+                        <button onclick="history.go(-1)" type="button" class="btn btn-primary btn-block btn-flat">首页
                         </button>
                     </div>
                 </div>

@@ -13,6 +13,16 @@ import java.util.Date;
 class SpringbootApplicationTests {
 
     @Test
+    void test1(){
+        if (1==2){
+            System.out.println(1);
+        }else if (2==2){
+            System.out.println(2);
+        }
+        System.out.println("over");
+    }
+
+    @Test
     void contextLoads() {
        /* String d = "20200101";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
