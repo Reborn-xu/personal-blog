@@ -215,18 +215,17 @@ function reset() {
 }
 
 $('#saveButton').click(function () {
-    var permissionName = $("#permissionName").val();
-    var permissionUrl = $("#permissionUrl").val();
-    var resourceType = $("#resourceType").val();
-    if (!validCN_ENString2_18(permissionName)) {
+    var roleName = $("#roleName").val();
+    var roleDesc = $("#roleDesc").val();
+    if (!validCN_ENString2_18(roleName)) {
         $('#edit-error-msg').css("display", "block");
         $('#edit-error-msg').html("请输入符合规范的分类名称！");
     } else {
         var params = $("#categoryForm").serialize();
-        var url = '/admin/permissions/save';
+        var url = '/admin/roles/save';
         var id = getSelectedRowWithoutAlert();
         if (id != null) {
-            url = '/admin/permissions/update';
+            url = '/admin/roles/update';
         }
         $.ajax({
             type: 'POST',//方法类型
