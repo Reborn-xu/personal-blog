@@ -3,7 +3,7 @@
 <mapper namespace="com.reborn.springboot.dao.BlogMapper">
 
     <sql id="insertFiled">blog_title,blog_sub_url,blog_cover_image,blog_content,blog_category_id,blog_category_name,
-        blog_tags,blog_status,enable_comment</sql>
+        blog_tags,blog_status,enable_comment,create_by,update_by</sql>
 
     <update id="deleteBlogsByPrimary" parameterType="java.lang.Integer">
         update tb_blog
@@ -14,17 +14,23 @@
         </foreach>
     </update>
 
-    <select id="findBlogList" resultType="com.reborn.springboot.entity.Blog">
+    <select id="findBlogList" resultType="com.reborn.springboot.entity.Blog" parameterType="java.util.Map">
         select *
         from tb_blog
-        where is_deleted=0
+        where
+        <if test="keyword!=null">
+            (blog_title LIKE CONCAT('%',#{keyword},'%')
+            OR blog_category_name LIKE CONCAT('%',#{keyword},'%'))
+            AND
+        </if>
+        is_deleted=0
     </select>
 
     <insert id="insertNewBlog" parameterType="com.reborn.springboot.entity.Blog"
             useGeneratedKeys="true" keyColumn="blog_id" keyProperty="blogId">
         insert into tb_blog(<include refid="insertFiled"></include>)
         values (#{blogTitle},#{blogSubUrl},#{blogCoverImage},#{blogContent},#{blogCategoryId},#{blogCategoryName},#{blogTags},
-        #{blogStatus},#{enableComment})
+        #{blogStatus},#{enableComment},#{createBy},#{updateBy})
     </insert>
 
     <select id="getBlogByPrimary" parameterType="Long" resultType="com.reborn.springboot.entity.Blog">

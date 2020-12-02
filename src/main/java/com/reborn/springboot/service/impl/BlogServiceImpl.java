@@ -86,7 +86,7 @@ public class BlogServiceImpl implements BlogService {
         int pageNum=Integer.parseInt((String)map.get("pageNum"));
         int pageSize=Integer.parseInt((String) map.get("pageSize"));
         PageHelper.startPage(pageNum, pageSize);
-        List<Blog> blogList = blogMapper.findBlogList();
+        List<Blog> blogList = blogMapper.findBlogList(map);
         return new PageInfo<Blog>(blogList);
     }
 

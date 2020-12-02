@@ -35,7 +35,7 @@ public class URLPathMatchingFilter extends PathMatchingFilter {
         if (urls.contains(requestURL)){
             return true;
         }
-
+        System.out.println("无权限");
         //没有权限
         if (isAjax((HttpServletRequest) request)){
             response.setCharacterEncoding("utf-8");

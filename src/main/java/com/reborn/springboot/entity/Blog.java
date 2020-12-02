@@ -37,6 +37,26 @@ public class Blog implements Serializable {
 
     private String blogContent;
 
+    private String createBy;
+
+    private String updateBy;
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
     public Long getBlogId() {
         return blogId;
     }

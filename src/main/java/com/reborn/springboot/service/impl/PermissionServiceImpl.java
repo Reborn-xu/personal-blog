@@ -8,6 +8,7 @@ import com.reborn.springboot.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public List<Permission> getPermissionList() {
-        return permissionMapper.findPermissionList();
+        return permissionMapper.findPermissionList(new HashMap<>());
     }
 
     @Override
@@ -33,7 +34,7 @@ public class PermissionServiceImpl implements PermissionService {
         int pageNum=Integer.parseInt((String)map.get("pageNum"));
         int pageSize=Integer.parseInt((String) map.get("pageSize"));
         PageHelper.startPage(pageNum, pageSize);
-        List<Permission> list = permissionMapper.findPermissionList();
+        List<Permission> list = permissionMapper.findPermissionList(map);
         return new PageInfo<>(list);
     }
 }

@@ -22,4 +22,28 @@
         where role_id=#{roleId}
         and  is_deleted=0
     </select>
+
+    <insert id="insertRole" parameterType="com.reborn.springboot.entity.Role">
+        INSERT INTO tb_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleName!=null">role_name,</if>
+            <if test="roleDesc!=null">role_desc,</if>
+            <if test="isDeleted!=null">is_deleted,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleName!=null">#{roleName},</if>
+            <if test="roleDesc!=null">#{roleDesc},</if>
+            <if test="isDeleted!=null">#{isDeleted},</if>
+        </trim>
+    </insert>
+    
+    <delete id="deleteRoles" parameterType="Integer">
+        DELETE  FROM tb_role
+        WHERE
+        role_id IN
+        <foreach collection="ids" item="roleId" separator="," open="(" close=")">
+          #{roleId}
+        </foreach>
+    </delete>
 </mapper>

@@ -3,6 +3,7 @@ package com.reborn.springboot.controller.admin;
 import com.github.pagehelper.PageInfo;
 import com.reborn.springboot.entity.Blog;
 import com.reborn.springboot.entity.Result;
+import com.reborn.springboot.entity.User;
 import com.reborn.springboot.service.BlogService;
 import com.reborn.springboot.service.CategoryService;
 import com.reborn.springboot.utils.ResultGenerator;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -95,7 +97,9 @@ public class BackBlogController {
      */
     @PostMapping("/blogs/save")
     @ResponseBody
-    public Result saveBlog(Blog blog){
+    public Result saveBlog(Blog blog,HttpSession session){
+        blog.setCreateBy(((User)session.getAttribute("user")).getNickName());
+        blog.setUpdateBy(((User)session.getAttribute("user")).getNickName());
         String result = blogService.saveBlog(blog);
         if (!result.equals("success")){
             return ResultGenerator.getFailResult("新增失败");
@@ -133,4 +137,6 @@ public class BackBlogController {
         }
         return ResultGenerator.getSuccessResult("修改成功");
     }
+
+
 }

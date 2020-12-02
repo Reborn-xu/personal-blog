@@ -11,4 +11,8 @@ public interface RoleMapper {
     List<Permission> getPermissionsByRoleId(Integer roleId);
 
     Role getRoleByPrimary(Integer roleId);
+
+    int insertRole(Role role);
+
+    int deleteRoles(Integer[] ids);
 }

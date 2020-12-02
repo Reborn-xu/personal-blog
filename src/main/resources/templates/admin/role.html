@@ -32,12 +32,12 @@
                     </div> <!-- /.card-body -->
                     <div class="card-body">
                         <div class="grid-btn">
-                            <button class="btn btn-success" onclick="permissionAdd()"><i
+                            <button class="btn btn-success" onclick="roleAdd()"><i
                                     class="fa fa-plus"></i>&nbsp;新增
                             </button>
-                            <button class="btn btn-info" onclick="editBlog()"><i
+                            <!--<button class="btn btn-info" onclick="editBlog()"><i
                                     class="fa fa-edit"></i>&nbsp;修改
-                            </button>
+                            </button>-->
                             <button class="btn btn-info" onclick="editPermissionToRole()"><i
                                     class="fa fa-edit"></i>&nbsp;编辑权限
                             </button>
@@ -46,10 +46,10 @@
                                         class="fa fa-trash-o"></i>&nbsp;删除
                                 </button>&nbsp;&nbsp;
                             </shiro:hasRole>
-                            <input type="text" placeholder="关键字(标题/分类)" id="keyword" class="form-control col-2">&nbsp;
+                            <!--<input type="text" placeholder="关键字(标题/分类)" id="keyword" class="form-control col-2">&nbsp;
                             <button class="btn btn-info" onclick="search()"><i
                                     class="fa fa-search"></i>&nbsp;搜索
-                            </button>
+                            </button>-->
                         </div>
                         <!-- JqGrid必要DOM,用于创建表格展示列表数据 -->
                         <table id="jqGrid" class="table table-bordered"></table>

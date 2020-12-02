@@ -40,7 +40,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public String saveRole(Role role) {
-        return null;
+        return roleMapper.insertRole(role) >=1 ? "success" : "fail";
     }
 
     @Override
@@ -63,5 +63,10 @@ public class RoleServiceImpl implements RoleService {
             return "fail";
         }
         return "success";
+    }
+
+    @Override
+    public String deleteRoles(Integer[] ids) {
+        return roleMapper.deleteRoles(ids)>=1 ? "success" : "fail";
     }
 }

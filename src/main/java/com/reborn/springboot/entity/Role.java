@@ -63,7 +63,7 @@ public class Role implements Serializable {
         this.roleDesc = roleDesc;
     }
 
-    public byte getIsDeleted() {
+    public Byte getIsDeleted() {
         return isDeleted;
     }
 

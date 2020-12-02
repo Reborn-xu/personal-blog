@@ -17,4 +17,6 @@ public interface RoleService {
     List<Permission> getPermissionsByRoleId(Integer roleId);
 
     String updateRolePermissions(Integer[] ids);
+
+    String deleteRoles(Integer[] ids);
 }

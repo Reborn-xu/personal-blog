@@ -1,6 +1,7 @@
 package com.reborn.springboot.controller.admin;
 
 import com.github.pagehelper.PageInfo;
+import com.reborn.springboot.dao.RoleMapper;
 import com.reborn.springboot.entity.Permission;
 import com.reborn.springboot.entity.Result;
 import com.reborn.springboot.entity.Role;
@@ -60,7 +61,7 @@ public class RoleController {
      */
     @PostMapping("/save")
     @ResponseBody
-    public Result savePermission(Role role){
+    public Result saveRole(Role role){
         String result = roleService.saveRole(role);
 //        if (permission.getPermissionId() == -1){
 //            permission.setPermissionId();
@@ -96,5 +97,15 @@ public class RoleController {
             return ResultGenerator.getFailResult("编辑失败");
         }
         return ResultGenerator.getSuccessResult("编辑成功");
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public Result deleteRoles(@RequestBody Integer[] ids){
+        String result = roleService.deleteRoles(ids);
+        if (!result.equals("success")){
+            return ResultGenerator.getFailResult("失败");
+        }
+        return ResultGenerator.getSuccessResult("成功");
     }
 }

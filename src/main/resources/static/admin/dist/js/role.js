@@ -105,6 +105,7 @@ function editPermissionToRole() {
             {label: 'url', name: 'permissionUrl', index: 'permissionUrl', width: 200},
             {label: '类型', name: 'resourceType', index: 'resourceType', width: 125},
         ],
+        rowNum: 999,
         height: 500,
         width: 450,
         // rowNum: 5,
@@ -181,7 +182,7 @@ function deleteBlog() {
         if (flag) {
             $.ajax({
                 type: "POST",
-                url: "/admin/blogs/delete",
+                url: "/admin/roles/delete",
                 contentType: "application/json",
                 data: JSON.stringify(ids),
                 success: function (r) {
@@ -202,9 +203,9 @@ function deleteBlog() {
 );
 }
 
-function permissionAdd() {
+function roleAdd() {
     reset();
-    $('.modal-title').html('权限添加');
+    $('.modal-title').html('角色添加');
     $('#categoryModal').modal('show');
 }
 function reset() {
@@ -223,10 +224,10 @@ $('#saveButton').click(function () {
     } else {
         var params = $("#categoryForm").serialize();
         var url = '/admin/roles/save';
-        var id = getSelectedRowWithoutAlert();
+        /*var id = getSelectedRowWithoutAlert();
         if (id != null) {
             url = '/admin/roles/update';
-        }
+        }*/
         $.ajax({
             type: 'POST',//方法类型
             url: url,
@@ -234,7 +235,7 @@ $('#saveButton').click(function () {
             success: function (result) {
                 if (result.resultCode == 200) {
                     $('#categoryModal').modal('hide');
-                    swal("保存成功", {
+                    swal(result.message, {
                         icon: "success",
                     });
                     reload();
@@ -258,11 +259,12 @@ $('#saveButton').click(function () {
 
 $('#updatePermission').click(function () {
     var permissions = getSelectedPermissions();
-    alert(permissions);
+    alert("权限数量："+permissions.length);
+    //alert(permissions);
     var roleId = getSelectedRowWithoutAlert();
-    alert("roleId"+roleId);
+    //alert("roleId"+roleId);
     permissions.push(roleId);
-    alert(permissions);
+
     $.ajax({
         type: "POST",
         url: "/admin/roles/updatePermissions",
