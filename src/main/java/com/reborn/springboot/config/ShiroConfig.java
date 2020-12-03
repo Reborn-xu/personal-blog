@@ -55,9 +55,10 @@ public class ShiroConfig {
         filterMap.put("/admin/register","anon");
         filterMap.put("/admin/logout","anon");
         filterMap.put("/admin/profile","anon");
-        //filterMap.put("/admin/blogs/edit","anon");
-        filterMap.put("/admin/index","anon");
+        filterMap.put("/admin/blogs/**","authc");
+
         filterMap.put("/admin","authc");
+        filterMap.put("/admin/index","authc");
         filterMap.put("/admin/**","requestURL");
         //授权过滤器perms，role
 

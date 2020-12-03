@@ -4,7 +4,11 @@
 
     <select id="findCommentList" resultType="com.reborn.springboot.entity.BlogComment">
         select * from tb_blog_comment
-        where is_deleted=0
+        where
+        <if test="blogId!=null">
+            blog_id=#{blogId} AND
+        </if>
+        is_deleted=0
         order by comment_create_time desc
     </select>
 

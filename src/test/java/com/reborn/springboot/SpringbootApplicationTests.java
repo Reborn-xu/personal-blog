@@ -1,8 +1,10 @@
 package com.reborn.springboot;
 
+import com.reborn.springboot.dao.UserMapper;
 import javafx.scene.input.DataFormat;
 import jdk.nashorn.internal.parser.DateParser;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.ParseException;
@@ -11,6 +13,13 @@ import java.util.Date;
 
 @SpringBootTest
 class SpringbootApplicationTests {
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    void test2(){
+
+    }
 
     @Test
     void test1(){

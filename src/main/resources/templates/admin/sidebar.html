@@ -46,17 +46,22 @@
 
                 <shiro:hasAnyPermissions name="/admin/blogs,/admin/tags,/admin/comments,/admin/categories">
                     <li class="nav-header">管理模块</li>
-
-                    <shiro:hasPermission name="/admin/blogs">
+                </shiro:hasAnyPermissions>
+                    <!--<shiro:hasPermission name="/admin/blogs">-->
                         <li class="nav-item">
                         <a th:href="@{/admin/blogs}" th:class="${path}=='blogs'?'nav-link active':'nav-link'">
                             <i class="fa fa-list-alt nav-icon" aria-hidden="true"></i>
                             <p>
-                                博客管理
+                                <shiro:hasRole name="admin">
+                                    博客管理
+                                </shiro:hasRole>
+                                <shiro:lacksRole name="admin">
+                                    我的博客
+                                </shiro:lacksRole>
                             </p>
                         </a>
                     </li>
-                    </shiro:hasPermission>
+                    <!--</shiro:hasPermission>-->
                     <shiro:hasPermission name="/admin/comments">
                         <li class="nav-item">
                             <a th:href="@{/admin/comments}" th:class="${path}=='comments'?'nav-link active':'nav-link'">
@@ -99,7 +104,7 @@
                             </p>
                         </a>
                     </li>-->
-                </shiro:hasAnyPermissions>
+
                     <shiro:hasRole name="admin">
                         <li class="nav-header">系统管理</li>
                         <li class="nav-item">

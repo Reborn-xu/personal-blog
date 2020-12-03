@@ -49,8 +49,8 @@ public class BlogController {
      * @param pageNum
      * @return
      */
-    @RequestMapping("/page")
-    public String page(HttpServletRequest request,String pageNum){
+    @RequestMapping("/page/{pageNum}")
+    public String page(HttpServletRequest request,@PathVariable(name = "pageNum") String pageNum){
         //获取博客分页信息，存入request域中
         Map<String,Object> map = new HashMap<>();
         map.put("pageNum",pageNum);
@@ -87,6 +87,7 @@ public class BlogController {
         Map<String,Object> map = new HashMap<>();
         map.put("pageNum",commentPage);
         map.put("pageSize",commentSize);
+        map.put("blogId",blogId);
         request.setAttribute("commentPageResult", commentService.getCommentsPage(map));
         //配置项
         request.setAttribute("configurations",configurationService.getAllConfigurations());

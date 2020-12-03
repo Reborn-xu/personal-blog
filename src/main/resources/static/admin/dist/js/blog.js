@@ -4,11 +4,12 @@ $(function () {
         datatype: "json",
         colModel: [
             {label: 'id', name: 'blogId', index: 'blogId', width: 50, key: true, hidden: true},
-            {label: '标题', name: 'blogTitle', index: 'blogTitle', width: 140},
+            {label: '标题', name: 'blogTitle', index: 'blogTitle', width: 100},
             {label: '预览图', name: 'blogCoverImage', index: 'blogCoverImage', width: 120, formatter: coverImageFormatter},
             {label: '浏览量', name: 'blogViews', index: 'blogViews', width: 60},
             {label: '状态', name: 'blogStatus', index: 'blogStatus', width: 60, formatter: statusFormatter},
             {label: '博客分类', name: 'blogCategoryName', index: 'blogCategoryName', width: 60},
+            {label: '作者', name: 'createBy', index: 'createBy', width: 50},
             {label: '添加时间', name: 'createTime', index: 'createTime', width: 90}
         ],
         height: 700,

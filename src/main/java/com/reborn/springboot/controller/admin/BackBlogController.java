@@ -46,9 +46,13 @@ public class BackBlogController {
      */
     @RequestMapping("/blogs/list")
     @ResponseBody
-    public Result blogsList(@RequestParam Map<String,Object> map){
+    public Result blogsList(@RequestParam Map<String,Object> map,HttpSession session){
         if (StringUtils.isEmpty(map.get("pageNum"))||StringUtils.isEmpty(map.get("pageSize"))){
             return ResultGenerator.getFailResult("参数异常");
+        }
+        if (session.getAttribute("user")!=null){
+            map.put("roleId",((User)session.getAttribute("user")).getRoleId());
+            map.put("nickName",((User)session.getAttribute("user")).getNickName());
         }
         PageInfo blogs = blogService.getBlogsPage(map);
         return ResultGenerator.getSuccessResult(blogs);
@@ -59,7 +63,7 @@ public class BackBlogController {
      * @param map
      * @return
      */
-    @RequestMapping("/blogs/customerList")
+    /*@RequestMapping("/blogs/customerList")
     @ResponseBody
     public Result customerBlogsList(@RequestParam Map<String,Object> map){
         if (StringUtils.isEmpty(map.get("pageNum"))||StringUtils.isEmpty(map.get("pageSize"))){
@@ -67,7 +71,7 @@ public class BackBlogController {
         }
         PageInfo blogs = blogService.getBlogsPage(map);
         return ResultGenerator.getSuccessResult(blogs);
-    }
+    }*/
 
 
     /*@GetMapping("/blogs/edit")

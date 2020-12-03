@@ -23,6 +23,10 @@
             OR blog_category_name LIKE CONCAT('%',#{keyword},'%'))
             AND
         </if>
+        /*过滤除管理员*/
+        <if test="roleId!=null and roleId!=1">
+            create_by=#{nickName} AND
+        </if>
         is_deleted=0
     </select>
 

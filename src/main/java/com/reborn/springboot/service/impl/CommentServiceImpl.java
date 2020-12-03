@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
         int pageNum = Integer.parseInt((String)map.get("pageNum"));
         int pageSize = Integer.parseInt((String) map.get("pageSize"));
         PageHelper.startPage(pageNum, pageSize);
-        List<BlogComment> blogList = commentMapper.findCommentList();
+        List<BlogComment> blogList = commentMapper.findCommentList(map);
         return new PageInfo<BlogComment>(blogList);
     }
 }
