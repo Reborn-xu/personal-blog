@@ -1,12 +1,13 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '/admin/user/list',
+        url: '/admin/users/list',
         datatype: "json",
         colModel: [
-            {label: 'id', name: 'permissionId', index: 'permissionId', width: 50, key: true, hidden: true},
-            {label: '名称', name: 'permissionName', index: 'permissionName', width: 140},
-            {label: 'url', name: 'permissionUrl', index: 'permissionUrl', width: 120},
-            {label: '类型', name: 'resourceType', index: 'resourceType', width: 60},
+            {label: 'id', name: 'userId', index: 'userId', width: 50, key: true, hidden: true},
+            {label: '昵称', name: 'nickName', index: 'nickName', width: 100},
+            {label: '邮箱', name: 'email', index: 'email', width: 120},
+            {label: '角色', name: 'roleName', index: 'roleName', width: 60},
+            {label: '状态', name: 'locked', index: 'locked', width: 60,formatter: statusFormatter},
         ],
         height: 500,
         rowNum: 10,
@@ -40,16 +41,12 @@ $(function () {
         $("#jqGrid").setGridWidth($(".card-body").width());
     });
 
-    function coverImageFormatter(cellvalue) {
-        return "<img src='" + cellvalue + "' height=\"120\" width=\"160\" alt='coverImage'/>";
-    }
-
     function statusFormatter(cellvalue) {
         if (cellvalue == 0) {
-            return "<button type=\"button\" class=\"btn btn-block btn-secondary btn-sm\" style=\"width: 50%;\">草稿</button>";
+            return "<button type=\"button\" class=\"btn btn-block btn-secondary btn-sm\" style=\"width: 50%;\">正常</button>";
         }
         else if (cellvalue == 1) {
-            return "<button type=\"button\" class=\"btn btn-block btn-success btn-sm\" style=\"width: 50%;\">发布</button>";
+            return "<button type=\"button\" class=\"btn btn-block btn-success btn-sm\" style=\"width: 50%;\">锁定</button>";
         }
     }
 
@@ -99,7 +96,7 @@ function editBlog() {
     window.location.href = "/admin/blogs/edit/" + id;
 }
 
-function deleteBlog() {
+function deleteUser() {
     var ids = getSelectedRows();
     if (ids == null) {
         return;
@@ -135,9 +132,9 @@ function deleteBlog() {
 );
 }
 
-function permissionAdd() {
+function editUserRole() {
     reset();
-    $('.modal-title').html('权限添加');
+    $('.modal-title').html('编辑用户角色');
     $('#categoryModal').modal('show');
 }
 function reset() {

@@ -59,28 +59,6 @@ public class BackBlogController {
     }
 
     /**
-     * 用户的所有博客（分页信息）
-     * @param map
-     * @return
-     */
-    /*@RequestMapping("/blogs/customerList")
-    @ResponseBody
-    public Result customerBlogsList(@RequestParam Map<String,Object> map){
-        if (StringUtils.isEmpty(map.get("pageNum"))||StringUtils.isEmpty(map.get("pageSize"))){
-            return ResultGenerator.getFailResult("参数异常");
-        }
-        PageInfo blogs = blogService.getBlogsPage(map);
-        return ResultGenerator.getSuccessResult(blogs);
-    }*/
-
-
-    /*@GetMapping("/blogs/edit")
-    public String editBlog(Model model){
-        model.addAttribute("path","edit");
-        model.addAttribute("categories",categoryService.getCategoryList());
-        return "admin/edit";
-    }*/
-    /**
      * 跳转到发布博客页面
      * @param model
      * @return

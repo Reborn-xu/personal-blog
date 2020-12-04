@@ -3,6 +3,7 @@ package com.reborn.springboot.controller.admin;
 import com.reborn.springboot.entity.Permission;
 import com.reborn.springboot.entity.Result;
 import com.reborn.springboot.entity.User;
+import com.reborn.springboot.entity.vo.UserVo;
 import com.reborn.springboot.service.RoleService;
 import com.reborn.springboot.service.UserService;
 import com.reborn.springboot.utils.ResultGenerator;
@@ -13,6 +14,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,7 +82,10 @@ public class AdminController {
             subject.login(token);
             //4、获取用户数据存入session中
             User user=(User) subject.getPrincipal();
-            session.setAttribute("user", user);
+            UserVo userVo = new UserVo();
+            BeanUtils.copyProperties(user,userVo);
+            userVo.setRoleName((roleService.getRoleByPrimary(userVo.getRoleId()).getRoleName()));
+            session.setAttribute("user", userVo);
             //session.setAttribute("role", );
 
             //该用户如果有角色

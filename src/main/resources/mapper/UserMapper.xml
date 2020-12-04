@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.reborn.springboot.dao.UserMapper">
 
-    <resultMap id="userMap" type="com.reborn.springboot.entity.User">
-        <id column="user_id" property="userId" javaType="int" jdbcType="INTEGER"/>
-        <result column="username" property="username" jdbcType="VARCHAR" javaType="string"/>
-        <result column="password" property="password" jdbcType="VARCHAR" javaType="string"/>
-        <result column="nick_name" property="nickName" jdbcType="VARCHAR" javaType="string"/>
-        <result column="locked" property="locked" jdbcType="TINYINT" javaType="byte"/>
+    <resultMap id="userVoMap" type="com.reborn.springboot.entity.vo.UserVo">
+        <id column="user_id" property="userId" javaType="INTEGER" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR" javaType="STRING"/>
+        <!--<result column="password" property="password" jdbcType="VARCHAR" javaType="string"/>-->
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" javaType="STRING"/>
+        <result column="locked" property="locked" jdbcType="TINYINT" javaType="BYTE"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER" javaType="INTEGER"/>
+        <result column="email" property="email" jdbcType="VARCHAR" javaType="STRING"/>
     </resultMap>
 
     <select id="getUserByUsername" parameterType="string" resultType="com.reborn.springboot.entity.User">
@@ -15,6 +17,12 @@
         WHERE
         username=#{username}
 
+    </select>
+
+    <select id="findUserList" parameterType="java.util.Map"
+            resultType="com.reborn.springboot.entity.vo.UserVo">
+        SELECT * FROM tb_user
+        ORDER BY user_id
     </select>
 
     <insert id="insertUser" parameterType="com.reborn.springboot.entity.User"
