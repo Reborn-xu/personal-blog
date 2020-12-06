@@ -11,8 +11,6 @@ public class Blog implements Serializable {
 
     private String blogTitle;
 
-    private String blogSubUrl;
-
     private String blogCoverImage;
 
     private Integer blogCategoryId;
@@ -24,8 +22,6 @@ public class Blog implements Serializable {
     private Byte blogStatus;
 
     private Long blogViews;
-
-    private Byte enableComment;
 
     private Byte isDeleted;
 
@@ -71,14 +67,6 @@ public class Blog implements Serializable {
 
     public void setBlogTitle(String blogTitle) {
         this.blogTitle = blogTitle;
-    }
-
-    public String getBlogSubUrl() {
-        return blogSubUrl;
-    }
-
-    public void setBlogSubUrl(String blogSubUrl) {
-        this.blogSubUrl = blogSubUrl;
     }
 
     public String getBlogCoverImage() {
@@ -127,14 +115,6 @@ public class Blog implements Serializable {
 
     public void setBlogViews(Long blogViews) {
         this.blogViews = blogViews;
-    }
-
-    public Byte getEnableComment() {
-        return enableComment;
-    }
-
-    public void setEnableComment(Byte enableComment) {
-        this.enableComment = enableComment;
     }
 
     public Byte getIsDeleted() {

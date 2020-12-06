@@ -69,4 +69,13 @@ public class RoleServiceImpl implements RoleService {
     public String deleteRoles(Integer[] ids) {
         return roleMapper.deleteRoles(ids)>=1 ? "success" : "fail";
     }
+
+    @Override
+    public List<Role> getRoleList() {
+        List<Role> roleList = roleMapper.findRoleList();
+        if (roleList == null){
+            return null;
+        }
+        return roleList;
+    }
 }

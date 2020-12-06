@@ -44,7 +44,9 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
                     <i class="fa fa-user-o mr-2"></i> 姓名
-                    <span class="float-right text-muted text-sm" th:text="${session.user.nickName}">Reborn</span>
+                    <th:block th:if="${session.user != null}">
+                        <span class="float-right text-muted text-sm" th:text="${session.user.nickName}">Reborn</span>
+                    </th:block>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">

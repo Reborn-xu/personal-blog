@@ -11,4 +11,9 @@ public interface UserService {
     String registerUser(User user);
 
     PageInfo getUsersPage(Map<String, Object> map);
+
+    User getUserByPrimary(Integer userId);
+
+    String editUserRole(Integer userId, Integer roleId);
+
 }

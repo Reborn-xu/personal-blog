@@ -19,7 +19,6 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/categories")
-@RequiresRoles(value = {"admin"})
 public class CategoryController {
 
     @Autowired

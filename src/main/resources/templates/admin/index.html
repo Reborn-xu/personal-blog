@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <header th:replace="admin/header::header-fragment"></header>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -53,56 +54,62 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-primary">
-                            <div class="inner">
-                                <h3 th:text="xxx">65</h3>
+                    <shiro:hasPermission name="/admin/comments">
+                        <div class="col-lg-4 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h3 th:text="xxx">65</h3>
 
-                                <p>收到评论数</p>
+                                    <p>收到评论数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-comments"></i>
+                                </div>
+                                <a th:href="@{/admin/comments}" class="small-box-footer">More info <i
+                                        class="fa fa-arrow-circle-right"></i></a>
                             </div>
-                            <div class="icon">
-                                <i class="fa fa-comments"></i>
-                            </div>
-                            <a th:href="@{/admin/comments}" class="small-box-footer">More info <i
-                                    class="fa fa-arrow-circle-right"></i></a>
                         </div>
-                    </div>
+                    </shiro:hasPermission>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-warning">
-                            <div class="inner">
-                                <h3 th:text="xxx">65</h3>
+                    <shiro:hasPermission name="/admin/categories">
+                        <div class="col-lg-4 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3 th:text="xxx">65</h3>
 
-                                <p>分类数量</p>
+                                    <p>分类数量</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-bookmark"></i>
+                                </div>
+                                <a th:href="@{/admin/categories}" class="small-box-footer">More info <i
+                                        class="fa fa-arrow-circle-right"></i></a>
                             </div>
-                            <div class="icon">
-                                <i class="fa fa-bookmark"></i>
-                            </div>
-                            <a th:href="@{/admin/categories}" class="small-box-footer">More info <i
-                                    class="fa fa-arrow-circle-right"></i></a>
                         </div>
-                    </div>
+                    </shiro:hasPermission>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3 th:text="xxx">65</h3>
+                    <shiro:hasPermission name="/admin/tags">
+                        <div class="col-lg-4 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3 th:text="xxx">65</h3>
 
-                                <p>标签总量</p>
+                                    <p>标签总量</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-tags"></i>
+                                </div>
+                                <a th:href="@{/admin/tags}" class="small-box-footer">More info <i
+                                        class="fa fa-arrow-circle-right"></i></a>
                             </div>
-                            <div class="icon">
-                                <i class="fa fa-tags"></i>
-                            </div>
-                            <a th:href="@{/admin/tags}" class="small-box-footer">More info <i
-                                    class="fa fa-arrow-circle-right"></i></a>
                         </div>
-                    </div>
+                    </shiro:hasPermission>
                     <!-- ./col -->
-                    <div class="col-lg-4 col-6">
-                        <!-- small box -->
+                    <!--<div class="col-lg-4 col-6">
+                        &lt;!&ndash; small box &ndash;&gt;
                         <div class="small-box bg-dark">
                             <div class="inner">
                                 <h3 th:text="xxx">65</h3>
@@ -115,7 +122,7 @@
                             <a th:href="@{/admin/links}" class="small-box-footer">More info <i
                                     class="fa fa-arrow-circle-right"></i></a>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- ./col -->
                 </div>
             </div><!-- /.container-fluid -->

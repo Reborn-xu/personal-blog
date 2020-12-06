@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.reborn.springboot.entity.Blog;
 import com.reborn.springboot.entity.Result;
 import com.reborn.springboot.entity.User;
+import com.reborn.springboot.entity.vo.UserVo;
 import com.reborn.springboot.service.BlogService;
 import com.reborn.springboot.service.CategoryService;
 import com.reborn.springboot.utils.ResultGenerator;
@@ -51,8 +52,8 @@ public class BackBlogController {
             return ResultGenerator.getFailResult("参数异常");
         }
         if (session.getAttribute("user")!=null){
-            map.put("roleId",((User)session.getAttribute("user")).getRoleId());
-            map.put("nickName",((User)session.getAttribute("user")).getNickName());
+            map.put("roleId",((UserVo)session.getAttribute("user")).getRoleId());
+            map.put("nickName",((UserVo)session.getAttribute("user")).getNickName());
         }
         PageInfo blogs = blogService.getBlogsPage(map);
         return ResultGenerator.getSuccessResult(blogs);

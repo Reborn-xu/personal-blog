@@ -273,11 +273,13 @@ $('#updatePermission').click(function () {
         //data: {"permissions":permissionIds,"roleId":roleId},
         success: function (r) {
             if (r.resultCode == 200) {
+                $('#categoryModal2').modal('hide');
                 swal(r.message, {
                     icon: "success",
                 });
                 $("#jqGridPermissions").trigger("reloadGrid");
             } else {
+                $('#categoryModal2').modal('hide');
                 swal(r.message, {
                     icon: "error",
                 });

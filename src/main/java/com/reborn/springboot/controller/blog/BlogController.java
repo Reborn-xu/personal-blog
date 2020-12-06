@@ -55,6 +55,7 @@ public class BlogController {
         Map<String,Object> map = new HashMap<>();
         map.put("pageNum",pageNum);
         map.put("pageSize",pageSize);
+        map.put("blogStatus",1);
         PageInfo<Blog> blogPageResult = blogService.getBlogsPage(map);
         request.setAttribute("blogPageResult", blogPageResult);
 

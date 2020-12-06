@@ -6,6 +6,7 @@ import com.reborn.springboot.service.CommentService;
 import com.reborn.springboot.utils.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,8 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("")
-    public String index(){
+    public String index(Model model){
+        model.addAttribute("path", "comments");
         return "admin/comment";
     }
 

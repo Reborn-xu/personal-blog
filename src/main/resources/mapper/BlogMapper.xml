@@ -27,6 +27,9 @@
         <if test="roleId!=null and roleId!=1">
             create_by=#{nickName} AND
         </if>
+        <if test="blogStatus!=null">
+            blog_status=#{blogStatus} AND
+        </if>
         is_deleted=0
     </select>
 

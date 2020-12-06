@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,5 +56,24 @@ public class UserServiceImpl implements UserService {
             blogList.get(i).setRoleName(role.getRoleName());
         }
         return new PageInfo<UserVo>(blogList);
+    }
+
+    @Override
+    public User getUserByPrimary(Integer userId) {
+        return userMapper.getUserByPrimary(userId);
+    }
+
+    /**
+     * 用userId修改用户的角色
+     * @param userId
+     * @param roleId
+     * @return
+     */
+    @Override
+    public String editUserRole(Integer userId, Integer roleId) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId",userId);
+        map.put("roleId",roleId);
+        return userMapper.updateUserByPrimary(map) >=1 ? "success":"fail";
     }
 }

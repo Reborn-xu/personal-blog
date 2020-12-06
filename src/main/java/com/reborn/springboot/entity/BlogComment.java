@@ -13,21 +13,15 @@ public class BlogComment {
 
     private String email;
 
-    private String websiteUrl;
-
     private String commentBody;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date commentCreateTime;
 
-    private String commentatorIp;
-
     private String replyBody;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date replyCreateTime;
-
-    private Byte commentStatus;
 
     private Byte isDeleted;
 
@@ -73,14 +67,6 @@ public class BlogComment {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getWebsiteUrl() {
-        return websiteUrl;
-    }
-
-    public void setWebsiteUrl(String websiteUrl) {
-        this.websiteUrl = websiteUrl == null ? null : websiteUrl.trim();
-    }
-
     public String getCommentBody() {
         return commentBody;
     }
@@ -97,14 +83,6 @@ public class BlogComment {
         this.commentCreateTime = commentCreateTime;
     }
 
-    public String getCommentatorIp() {
-        return commentatorIp;
-    }
-
-    public void setCommentatorIp(String commentatorIp) {
-        this.commentatorIp = commentatorIp == null ? null : commentatorIp.trim();
-    }
-
     public String getReplyBody() {
         return replyBody;
     }
@@ -119,14 +97,6 @@ public class BlogComment {
 
     public void setReplyCreateTime(Date replyCreateTime) {
         this.replyCreateTime = replyCreateTime;
-    }
-
-    public Byte getCommentStatus() {
-        return commentStatus;
-    }
-
-    public void setCommentStatus(Byte commentStatus) {
-        this.commentStatus = commentStatus;
     }
 
     public Byte getIsDeleted() {
@@ -147,13 +117,13 @@ public class BlogComment {
         sb.append(", blogId=").append(blogId);
         sb.append(", commentator=").append(commentator);
         sb.append(", email=").append(email);
-        sb.append(", websiteUrl=").append(websiteUrl);
+
         sb.append(", commentBody=").append(commentBody);
         sb.append(", commentCreateTime=").append(commentCreateTime);
-        sb.append(", commentatorIp=").append(commentatorIp);
+
         sb.append(", replyBody=").append(replyBody);
         sb.append(", replyCreateTime=").append(replyCreateTime);
-        sb.append(", commentStatus=").append(commentStatus);
+
         sb.append(", isDeleted=").append(isDeleted);
         sb.append("]");
         return sb.toString();

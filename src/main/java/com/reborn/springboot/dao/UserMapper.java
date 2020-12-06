@@ -12,4 +12,8 @@ public interface UserMapper {
     int insertUser(User user);
 
     List<UserVo> findUserList(Map<String, Object> map);
+
+    User getUserByPrimary(Integer userId);
+
+    int updateUserByPrimary(Map<String,Object> map);
 }

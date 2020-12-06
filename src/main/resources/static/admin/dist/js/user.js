@@ -133,9 +133,42 @@ function deleteUser() {
 }
 
 function editUserRole() {
+    var userId = getSelectedRow();
+    if (userId == null){
+        return;
+    }
     reset();
     $('.modal-title').html('编辑用户角色');
     $('#categoryModal').modal('show');
+    //alert(userId);
+    $.ajax({
+        type: "GET",
+        url: "/admin/users/getUserRole",
+        /*contentType: "application/json",
+        data: JSON.stringify(ids),*/
+        data: {"userId":userId},
+        success: function (r) {
+            if (r.resultCode == 200) {
+                var roleId = r.data.roleId;
+                if (roleId == null){
+                    alert("id为空");
+                }
+                $("#roleIds option").each(function () {
+                    var id = $(this).val();
+                    //alert(id);
+                    if (roleId == id){
+                        $(this).attr("selected","selected");
+                        return;
+                    }
+                });
+                
+            } else {
+                swal(r.message, {
+                    icon: "error",
+                });
+            }
+        }
+    });
 }
 function reset() {
     $("#permissionName").val('');
@@ -145,44 +178,36 @@ function reset() {
 }
 
 $('#saveButton').click(function () {
-    var permissionName = $("#permissionName").val();
-    var permissionUrl = $("#permissionUrl").val();
-    var resourceType = $("#resourceType").val();
-    if (!validCN_ENString2_18(permissionName)) {
-        $('#edit-error-msg').css("display", "block");
-        $('#edit-error-msg').html("请输入符合规范的分类名称！");
-    } else {
-        var params = $("#categoryForm").serialize();
-        var url = '/admin/permissions/save';
-        var id = getSelectedRowWithoutAlert();
-        if (id != null) {
-            url = '/admin/permissions/update';
-        }
-        $.ajax({
-            type: 'POST',//方法类型
-            url: url,
-            data: params,
-            success: function (result) {
-                if (result.resultCode == 200) {
-                    $('#categoryModal').modal('hide');
-                    swal("保存成功", {
-                        icon: "success",
-                    });
-                    reload();
-                }
-                else {
-                    $('#categoryModal').modal('hide');
-                    swal(result.message, {
-                        icon: "error",
-                    });
-                }
-                ;
-            },
-            error: function () {
-                swal("操作失败", {
+    var userId = getSelectedRowWithoutAlert();
+    if (userId == null){
+        return;
+    }
+    var roleId = $("#roleIds").val();
+    var params ={ "roleId":roleId , "userId":userId };
+    $.ajax({
+        type: 'GET',//方法类型
+        url: "/admin/users/editUserRole",
+        data: params,
+        success: function (result) {
+            if (result.resultCode == 200) {
+                $('#categoryModal').modal('hide');
+                swal(result.message, {
+                    icon: "success",
+                });
+                reload();
+            }
+            else {
+                $('#categoryModal').modal('hide');
+                swal(result.message, {
                     icon: "error",
                 });
-            }
-        });
-    }
+            };
+        },
+        error: function () {
+            swal("操作失败", {
+                icon: "error",
+            });
+        }
+    });
+
 });
