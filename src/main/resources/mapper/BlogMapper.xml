@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.reborn.springboot.dao.BlogMapper">
 
-    <sql id="insertFiled">blog_title,blog_sub_url,blog_cover_image,blog_content,blog_category_id,blog_category_name,
-        blog_tags,blog_status,enable_comment,create_by,update_by</sql>
+    <sql id="insertFiled">blog_title,blog_cover_image,blog_content,blog_category_id,blog_category_name,
+        blog_tags,blog_status,create_by,update_by</sql>
 
     <update id="deleteBlogsByPrimary" parameterType="java.lang.Integer">
         update tb_blog
@@ -36,8 +36,8 @@
     <insert id="insertNewBlog" parameterType="com.reborn.springboot.entity.Blog"
             useGeneratedKeys="true" keyColumn="blog_id" keyProperty="blogId">
         insert into tb_blog(<include refid="insertFiled"></include>)
-        values (#{blogTitle},#{blogSubUrl},#{blogCoverImage},#{blogContent},#{blogCategoryId},#{blogCategoryName},#{blogTags},
-        #{blogStatus},#{enableComment},#{createBy},#{updateBy})
+        values (#{blogTitle},#{blogCoverImage},#{blogContent},#{blogCategoryId},#{blogCategoryName},#{blogTags},
+        #{blogStatus},#{createBy},#{updateBy})
     </insert>
 
     <select id="getBlogByPrimary" parameterType="Long" resultType="com.reborn.springboot.entity.Blog">
@@ -51,9 +51,7 @@
             <if test="blogTitle != null">
                 blog_title = #{blogTitle},
             </if>
-            <if test="blogSubUrl != null">
-                blog_sub_url = #{blogSubUrl},
-            </if>
+
             <if test="blogCoverImage != null">
                 blog_cover_image = #{blogCoverImage},
             </if>
@@ -75,9 +73,7 @@
             <if test="blogViews != null">
                 blog_views = #{blogViews},
             </if>
-            <if test="enableComment != null">
-                enable_comment = #{enableComment},
-            </if>
+
             <if test="isDeleted != null">
                 is_deleted = #{isDeleted},
             </if>

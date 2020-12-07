@@ -140,59 +140,58 @@
             </ul>
         </th:block>
     </aside>
-    <th:block th:if="${blogDetailVO.enableComment==0}">
-        <aside class="create-comment" id="create-comment">
-            <hr>
-            <h2><i class="fa fa-pencil"></i> 添加评论</h2>
-            <table id="commentForm" class="form">
-                <tbody>
-                <!--<tr>
-                    <td>
 
-                        <input type="text" name="commentator" id="commentator" placeholder="(*必填)怎么称呼你?">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="email" name="email" id="email" placeholder="(*必填)你的联系邮箱">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name="websiteUrl" id="websiteUrl" placeholder="你的网站地址(可不填)">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input style="width:50%" type="text" name="verifyCode" id="verifyCode"
-                               placeholder="(*必填)请输入验证码">&nbsp;&nbsp;
-                        <img alt="单击图片刷新！" class="pointer" style="margin-top: 15px; border-radius: 25px;"
-                             th:src="@{/common/kaptcha}"
-                             onclick="this.src='/common/kaptcha?d='+new Date()*1">
-                    </td>
-                </tr>-->
-                <tr>
-                    <td>
-                        <input type="hidden" id="blogId" name="blogId" th:value="${blogDetailVO.blogId}">
-                        <th:block th:if="${session.user!=null}">
-                            <input type="hidden" id="userId" name="userId" th:value="${session.user.userId}">
-                            <input type="hidden" id="commentator" name="commentator" th:value="${session.user.nickName}">
-                            <input type="hidden" id="email" name="email" th:value="${session.user.email}">
-                        </th:block>
-                        <textarea rows="5" name="commentBody" id="commentBody" placeholder="请输入你的评论"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                        <button id="commentSubmit" type="submit"
-                                class="submit am-btn am-btn-primary">提交
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </aside>
-    </th:block>
+    <aside class="create-comment" id="create-comment">
+        <hr>
+        <h2><i class="fa fa-pencil"></i> 添加评论</h2>
+        <table id="commentForm" class="form">
+            <tbody>
+            <!--<tr>
+                <td>
+
+                    <input type="text" name="commentator" id="commentator" placeholder="(*必填)怎么称呼你?">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="email" name="email" id="email" placeholder="(*必填)你的联系邮箱">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="websiteUrl" id="websiteUrl" placeholder="你的网站地址(可不填)">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input style="width:50%" type="text" name="verifyCode" id="verifyCode"
+                           placeholder="(*必填)请输入验证码">&nbsp;&nbsp;
+                    <img alt="单击图片刷新！" class="pointer" style="margin-top: 15px; border-radius: 25px;"
+                         th:src="@{/common/kaptcha}"
+                         onclick="this.src='/common/kaptcha?d='+new Date()*1">
+                </td>
+            </tr>-->
+            <tr>
+                <td>
+                    <input type="hidden" id="blogId" name="blogId" th:value="${blogDetailVO.blogId}">
+                    <th:block th:if="${session.user!=null}">
+                        <input type="hidden" id="userId" name="userId" th:value="${session.user.userId}">
+                        <input type="hidden" id="commentator" name="commentator" th:value="${session.user.nickName}">
+                        <input type="hidden" id="email" name="email" th:value="${session.user.email}">
+                    </th:block>
+                    <textarea rows="5" name="commentBody" id="commentBody" placeholder="请输入你的评论"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button id="commentSubmit" type="submit"
+                            class="submit am-btn am-btn-primary">提交
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </aside>
     <p class="back-top" id="back-top" style="display:none"><a href="#top"><span></span></a></p>
 </div>
 <footer th:replace="blog/amaze/footer::footer-fragment"></footer>
