@@ -23,9 +23,9 @@
             OR blog_category_name LIKE CONCAT('%',#{keyword},'%'))
             AND
         </if>
-        /*过滤除管理员*/
-        <if test="roleId!=null and roleId!=1">
-            create_by=#{nickName} AND
+        /*过滤创建人，除了管理员能访问全部*/
+        <if test="createBy!=null">
+            create_by=#{createBy} AND
         </if>
         <if test="blogStatus!=null">
             blog_status=#{blogStatus} AND
@@ -76,6 +76,12 @@
 
             <if test="isDeleted != null">
                 is_deleted = #{isDeleted},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},

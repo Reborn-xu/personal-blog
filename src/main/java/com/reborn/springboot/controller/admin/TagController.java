@@ -16,14 +16,12 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/tags")
-@RequiresRoles(value = {"admin"})
 public class TagController {
 
     @Autowired
     private TagService tagService;
 
     @RequestMapping("")
-    @RequiresRoles(value = {"admin"})
      public String tagsPage(Model model){
         model.addAttribute("path","tags");
          return "admin/tag";

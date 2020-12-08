@@ -51,10 +51,10 @@ public class BackBlogController {
         if (StringUtils.isEmpty(map.get("pageNum"))||StringUtils.isEmpty(map.get("pageSize"))){
             return ResultGenerator.getFailResult("参数异常");
         }
-        if (session.getAttribute("user")!=null){
+        /*if (session.getAttribute("user")!=null){
             map.put("roleId",((UserVo)session.getAttribute("user")).getRoleId());
             map.put("nickName",((UserVo)session.getAttribute("user")).getNickName());
-        }
+        }*/
         PageInfo blogs = blogService.getBlogsPage(map);
         return ResultGenerator.getSuccessResult(blogs);
     }
@@ -81,8 +81,6 @@ public class BackBlogController {
     @PostMapping("/blogs/save")
     @ResponseBody
     public Result saveBlog(Blog blog,HttpSession session){
-        blog.setCreateBy(((User)session.getAttribute("user")).getNickName());
-        blog.setUpdateBy(((User)session.getAttribute("user")).getNickName());
         String result = blogService.saveBlog(blog);
         if (!result.equals("success")){
             return ResultGenerator.getFailResult("新增失败");

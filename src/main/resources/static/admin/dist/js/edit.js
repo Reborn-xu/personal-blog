@@ -83,7 +83,7 @@ $(function () {
 
 $('#confirmButton').click(function () {
     var blogTitle = $('#blogName').val();
-    var blogSubUrl = $('#blogSubUrl').val();
+    /*var blogSubUrl = $('#blogSubUrl').val();*/
     var blogCategoryId = $('#blogCategoryId').val();
     var blogTags = $('#blogTags').val();
     var blogContent = blogEditor.getMarkdown();
@@ -99,12 +99,12 @@ $('#confirmButton').click(function () {
         });
         return;
     }
-    if (!validLength(blogSubUrl, 150)) {
+    /*if (!validLength(blogSubUrl, 150)) {
         swal("路径过长", {
             icon: "error",
         });
         return;
-    }
+    }*/
     if (isNull(blogCategoryId)) {
         swal("请选择文章分类", {
             icon: "error",
@@ -141,14 +141,14 @@ $('#confirmButton').click(function () {
 $('#saveButton').click(function () {
     var blogId = $('#blogId').val();
     var blogTitle = $('#blogName').val();
-    var blogSubUrl = $('#blogSubUrl').val();
+    /*var blogSubUrl = $('#blogSubUrl').val();*/
     var blogCategoryId = $('#blogCategoryId').val();
     var blogTags = $('#blogTags').val();
     var blogContent = blogEditor.getMarkdown();
     //var blogCoverImage = $('#blogCoverImage')[0].src;
     var blogCoverImage = $("#blogCoverImage").attr("src");
     var blogStatus = $("input[name='blogStatus']:checked").val();
-    var enableComment = $("input[name='enableComment']:checked").val();
+    /*var enableComment = $("input[name='enableComment']:checked").val();*/
     if (isNull(blogCoverImage) || blogCoverImage.indexOf('img-upload') != -1) {
         swal("封面图片不能为空", {
             icon: "error",
@@ -158,9 +158,8 @@ $('#saveButton').click(function () {
     var url = '/admin/blogs/save';
     var swlMessage = '保存成功';
     var data = {
-        "blogTitle": blogTitle, "blogSubUrl": blogSubUrl, "blogCategoryId": blogCategoryId,
+        "blogTitle": blogTitle,  "blogCategoryId": blogCategoryId,
         "blogTags": blogTags, "blogContent": blogContent, "blogCoverImage": blogCoverImage, "blogStatus": blogStatus,
-        "enableComment": enableComment
     };
     if (blogId > 0) {
         url = '/admin/blogs/update';
@@ -168,13 +167,11 @@ $('#saveButton').click(function () {
         data = {
             "blogId": blogId,
             "blogTitle": blogTitle,
-            "blogSubUrl": blogSubUrl,
             "blogCategoryId": blogCategoryId,
             "blogTags": blogTags,
             "blogContent": blogContent,
             "blogCoverImage": blogCoverImage,
             "blogStatus": blogStatus,
-            "enableComment": enableComment
         };
     }
     //data = JSON.stringify(data);
