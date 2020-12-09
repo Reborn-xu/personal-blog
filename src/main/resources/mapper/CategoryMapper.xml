@@ -14,4 +14,34 @@
         where category_id=#{categoryId}
         and is_deleted=0
     </select>
+
+    <insert id="insertCategory" parameterType="com.reborn.springboot.entity.BlogCategory">
+        INSERT INTO tb_blog_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId!=null">category_id,</if>
+            <if test="categoryName!=null">category_name,</if>
+            <if test="categoryIcon!=null">category_icon,</if>
+            <if test="categoryRank!=null">category_rank,</if>
+            <if test="isDeleted!=null">is_deleted,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId!=null">#{categoryId},</if>
+            <if test="categoryName!=null">#{categoryName},</if>
+            <if test="categoryIcon!=null">#{categoryIcon},</if>
+            <if test="categoryRank!=null">#{categoryRank},</if>
+            <if test="isDeleted!=null">#{isDeleted},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCategoryByPrimary" parameterType="com.reborn.springboot.entity.BlogCategory">
+        update tb_blog_category
+        <set>
+            <if test="categoryName!=null">category_name=#{categoryName},</if>
+            <if test="categoryIcon!=null">category_icon=#{categoryIcon},</if>
+            <if test="categoryRank!=null">category_rank=#{categoryRank},</if>
+            <if test="isDeleted!=null">is_deleted=#{isDeleted},</if>
+        </set>
+        where category_id=#{categoryId}
+    </update>
 </mapper>

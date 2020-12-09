@@ -32,4 +32,16 @@ public class CategoryServiceImpl implements CategoryService {
         List<BlogCategory> categoryList = categoryMapper.findCategoryList();
         return new PageInfo<>(categoryList);
     }
+
+    @Override
+    public String updateCategoryByPrimary(BlogCategory blogCategory) {
+        categoryMapper.updateCategoryByPrimary(blogCategory);
+        return null;
+    }
+
+    @Override
+    public String saveCategory(BlogCategory blogCategory) {
+        categoryMapper.insertCategory(blogCategory);
+        return null;
+    }
 }

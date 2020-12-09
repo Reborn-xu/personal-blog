@@ -41,11 +41,22 @@ public class CategoryController {
 
     @GetMapping("/save")
     @ResponseBody
-    public Result saveCategory(){
-        String result = "";
+    public Result saveCategory(BlogCategory blogCategory){
+        String result = categoryService.saveCategory(blogCategory);
         if (!result.equals("success")){
             return ResultGenerator.getFailResult("修改失败");
         }
         return ResultGenerator.getSuccessResult("修改成功");
     }
+
+    @GetMapping("/update")
+    @ResponseBody
+    public Result updateCategory(BlogCategory blogCategory){
+        String result = categoryService.updateCategoryByPrimary(blogCategory);
+        if (!result.equals("success")){
+            return ResultGenerator.getFailResult("修改失败");
+        }
+        return ResultGenerator.getSuccessResult("修改成功");
+    }
+
 }

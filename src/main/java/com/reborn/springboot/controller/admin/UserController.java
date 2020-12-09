@@ -72,4 +72,14 @@ public class UserController {
         }
         return ResultGenerator.getSuccessResult("修改成功");
     }
+
+    @GetMapping("/lockUser")
+    @ResponseBody
+    public Result lockUser(@RequestParam Map<String,Object> map){
+        String result = userService.lockUser(map);
+        if (!result.equals("success")){
+            return ResultGenerator.getFailResult("修改失败");
+        }
+        return ResultGenerator.getSuccessResult("修改成功");
+    }
 }

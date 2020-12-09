@@ -96,24 +96,23 @@ function editBlog() {
     window.location.href = "/admin/blogs/edit/" + id;
 }
 
-function deleteUser() {
-    var ids = getSelectedRows();
-    if (ids == null) {
+function lockUser() {
+    var id = getSelectedRow();
+    if (id == null) {
         return;
     }
     swal({
         title: "确认弹框",
-        text: "确认要删除数据吗?",
+        text: "确认要锁定用户吗?",
         icon: "warning",
         buttons: true,
         dangerMode: true,
     }).then((flag) => {
         if (flag) {
             $.ajax({
-                type: "POST",
-                url: "/admin/blogs/delete",
-                contentType: "application/json",
-                data: JSON.stringify(ids),
+                type: "GET",
+                url: "/admin/users/lockUser",
+                data: { "userId" : id },
                 success: function (r) {
                     if (r.resultCode == 200) {
                         swal("删除成功", {

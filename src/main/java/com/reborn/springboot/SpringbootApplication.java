@@ -13,17 +13,17 @@ import java.util.Collections;
 
 @MapperScan("com.reborn.springboot.dao")
 @SpringBootApplication
-public class SpringbootApplication extends SpringBootServletInitializer {
+public class SpringbootApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootApplication.class, args);
     }
 
-    @Override
+    /*@Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
         servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
         SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
         sessionCookieConfig.setHttpOnly(true);
-    }
+    }*/
 }

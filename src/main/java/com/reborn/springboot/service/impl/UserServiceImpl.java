@@ -63,6 +63,13 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUserByPrimary(userId);
     }
 
+    @Override
+    public String lockUser(Map<String, Object> map) {
+        map.put("locked",1);
+        int result = userMapper.updateUserByPrimary(map);
+        return result >=1 ?"success":"fail";
+    }
+
     /**
      * 用userId修改用户的角色
      * @param userId

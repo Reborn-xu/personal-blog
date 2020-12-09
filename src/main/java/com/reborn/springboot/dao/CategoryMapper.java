@@ -8,4 +8,8 @@ public interface CategoryMapper {
     List<BlogCategory> findCategoryList();
 
     BlogCategory findCategoryById(int categoryId);
+
+    int updateCategoryByPrimary(BlogCategory blogCategory);
+
+    int insertCategory(BlogCategory blogCategory);
 }

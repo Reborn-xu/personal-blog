@@ -10,4 +10,8 @@ public interface CategoryService {
     List<BlogCategory> getCategoryList();
 
     PageInfo<BlogCategory> getBlogCategoryPage(Map<String,Object> map);
+
+    String updateCategoryByPrimary(BlogCategory blogCategory);
+
+    String saveCategory(BlogCategory blogCategory);
 }

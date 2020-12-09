@@ -62,7 +62,7 @@ public class UserRealm extends AuthorizingRealm {
             //用户名为空
             throw new UnknownAccountException();
         }
-        if (user.getLocked().equals(1)){
+        if (user.getLocked().toString().equals("1")){
             //用户锁定
             throw new LockedAccountException();
         }
