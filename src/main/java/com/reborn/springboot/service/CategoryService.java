@@ -14,4 +14,6 @@ public interface CategoryService {
     String updateCategoryByPrimary(BlogCategory blogCategory);
 
     String saveCategory(BlogCategory blogCategory);
+
+    BlogCategory getCategoryByPrimary(Integer categoryId);
 }

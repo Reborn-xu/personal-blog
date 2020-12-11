@@ -35,13 +35,19 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public String updateCategoryByPrimary(BlogCategory blogCategory) {
-        categoryMapper.updateCategoryByPrimary(blogCategory);
-        return null;
+        int result = categoryMapper.updateCategoryByPrimary(blogCategory);
+        return result >=1 ? "success" : "fail" ;
     }
 
     @Override
     public String saveCategory(BlogCategory blogCategory) {
-        categoryMapper.insertCategory(blogCategory);
-        return null;
+        int result = categoryMapper.insertCategory(blogCategory);
+        return result >=1 ? "success" : "fail" ;
+    }
+
+    @Override
+    public BlogCategory getCategoryByPrimary(Integer categoryId) {
+        BlogCategory category = categoryMapper.findCategoryById(categoryId);
+        return category;
     }
 }

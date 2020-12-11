@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -39,14 +36,14 @@ public class CategoryController {
         return ResultGenerator.getSuccessResult(categoryService.getBlogCategoryPage(map));
     }
 
-    @GetMapping("/save")
+    @PostMapping("/save")
     @ResponseBody
     public Result saveCategory(BlogCategory blogCategory){
         String result = categoryService.saveCategory(blogCategory);
         if (!result.equals("success")){
-            return ResultGenerator.getFailResult("修改失败");
+            return ResultGenerator.getFailResult("保存失败");
         }
-        return ResultGenerator.getSuccessResult("修改成功");
+        return ResultGenerator.getSuccessResult("保存成功");
     }
 
     @GetMapping("/update")
@@ -59,4 +56,10 @@ public class CategoryController {
         return ResultGenerator.getSuccessResult("修改成功");
     }
 
+    @GetMapping("/getCategoryByPrimary")
+    @ResponseBody
+    public Result getCategoryByPrimary(@RequestParam Integer categoryId){
+        BlogCategory category = categoryService.getCategoryByPrimary(categoryId);
+        return ResultGenerator.getSuccessResult(category);
+    }
 }

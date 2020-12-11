@@ -126,6 +126,30 @@ function categoryEdit() {
     $('.modal-title').html('分类编辑');
     $('#categoryModal').modal('show');
     $("#categoryId").val(id);
+    $.ajax({
+        type: "GET",
+        url: "/admin/categories/getCategoryByPrimary",
+        data: {"categoryId":id},
+        success: function (r) {
+            if (r.resultCode == 200) {
+               var name =r.data.categoryName;
+               var categoryUrl =r.data.categoryIcon;
+               $("#categoryName").val(name);
+                $("#categoryIcon option").each(function () {
+                    var url = $(this).val();
+                    //alert(id);
+                    if (categoryUrl == url){
+                        $(this).prop("selected", 'selected');
+                        return;
+                    }
+                });
+            } else {
+                swal(r.message, {
+                    icon: "操作错误",
+                });
+            }
+        }
+    });
 }
 
 function deleteCagegory() {
