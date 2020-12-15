@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 
 @SpringBootTest
 class SpringbootApplicationTests {
@@ -18,7 +19,21 @@ class SpringbootApplicationTests {
 
     @Test
     void test2(){
-
+        Person p1 = new Person();
+        p1.name="p1";
+        HashSet hashSet = new HashSet();
+        for (int i=0;i<5;i++){
+            p1.name=p1.name+i;
+            System.out.println(p1.name);
+            hashSet.add(p1);
+        }
+        System.out.println(hashSet.size());
+        for (Object hashSet1:hashSet){
+            if (hashSet1 instanceof Person){
+                System.out.println("obj is persion");
+            }
+            System.out.println(hashSet1);
+        }
     }
 
     @Test
@@ -63,4 +78,7 @@ class SpringbootApplicationTests {
         }
     }
 
+}
+class Person{
+    public String name;
 }

@@ -131,23 +131,23 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a th:href="@{/admin/configurations}"
                                th:class="${path}=='configurations'?'nav-link active':'nav-link'">
                                 <i class="fa fa-wrench nav-icon"></i>
                                 <p>系统配置</p>
                             </a>
-                        </li>
+                        </li>-->
                     </shiro:hasRole>
 
                 <li class="nav-header">安全管理</li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a th:href="@{/admin/profile}"
                        th:class="${path}=='profile'?'nav-link active':'nav-link'">
                         <i class="fa fa-user-secret nav-icon"></i>
                         <p>修改密码</p>
                     </a>
-                </li>
+                </li>-->
                 <li class="nav-item">
                     <a th:href="@{/admin/logout}" class="nav-link">
                         <i class="fa fa-sign-out nav-icon"></i>

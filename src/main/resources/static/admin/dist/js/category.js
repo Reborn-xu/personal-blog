@@ -70,6 +70,7 @@ function reload() {
 }
 
 function categoryAdd() {
+
     reset();
     $('.modal-title').html('分类添加');
     $('#categoryModal').modal('show');
@@ -82,6 +83,7 @@ $('#saveButton').click(function () {
         $('#edit-error-msg').css("display", "block");
         $('#edit-error-msg').html("请输入符合规范的分类名称！");
     } else {
+        $("#categoryId").val(null);
         var params = $("#categoryForm").serialize();
         var url = '/admin/categories/save';
         var id = getSelectedRowWithoutAlert();

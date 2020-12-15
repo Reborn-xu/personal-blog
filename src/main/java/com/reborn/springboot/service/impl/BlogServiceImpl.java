@@ -194,4 +194,27 @@ public class BlogServiceImpl implements BlogService {
 
         return "success";
     }
+
+    @Override
+    public List<Blog> getFavoriteBlogs(Map<String, Object> params) {
+        //写点击最多的博客的筛选条件
+        params.put("orderByBlogView", 1);
+        params.put("limit", 3);
+        return blogMapper.findBlogList(params);
+    }
+
+    @Override
+    public List<Blog> getBlogsByTagName(String tagName) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("blogName",tagName);
+        List<Blog> blogList = blogMapper.findBlogList(map);
+        return blogList;
+    }
+
+    @Override
+    public List<Blog> getBlogsByCategoryId(Integer categoryId) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("categoryId",categoryId);
+        return blogMapper.findBlogList(map);
+    }
 }

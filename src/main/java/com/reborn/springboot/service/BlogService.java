@@ -20,4 +20,9 @@ public interface BlogService {
 
     BlogDetailVO getBlogDetailVOByPrimary(Long blogId);
 
+    List<Blog> getFavoriteBlogs(Map<String,Object> params);
+
+    List<Blog> getBlogsByTagName(String tagName);
+
+    List<Blog> getBlogsByCategoryId(Integer categoryId);
 }

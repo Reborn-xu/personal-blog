@@ -20,14 +20,14 @@
         <section>
             <div class="sidebar-header">
                 <span class="sidebar-header-title">
-                    热门标签
+                    所有标签
                 </span>
             </div>
             <div class="tags ">
-                <th:block th:if="${null != hotTags}">
-                    <th:block th:each="hotTag : ${hotTags}">
-                        <a rel="tag" th:href="@{'/tag/' + ${hotTag.tagName}}">
-                            <th:block th:text="${hotTag.tagName}+'('+${hotTag.tagCount}+')'"></th:block>
+                <th:block th:if="${null != Tags}">
+                    <th:block th:each="Tag : ${Tags}">
+                        <a rel="tag" th:href="@{'/tag/' + ${Tag.tagName}}">
+                            <th:block th:text="${Tag.tagName}"></th:block>
                         </a>
                     </th:block>
                 </th:block>
@@ -36,20 +36,17 @@
         <section>
             <div class="sidebar-header">
                 <span class="sidebar-header-title">
-                    最新发布
+                    所有分类
                 </span>
             </div>
-            <div class="sidebar-list">
-                <ul class="sidebar-list-body sidebar-list-items">
-                    <th:block th:if="${null != newBlogs}">
-                        <th:block th:each="newBlog : ${newBlogs}">
-                            <li class="sidebar-list-item"><a th:href="@{'/blog/' + ${newBlog.blogId}}"
-                                                             class="tag tooltipped tooltipped-n">
-                                <th:block th:text="${newBlog.blogTitle}"></th:block>
-                            </a></li>
-                        </th:block>
+            <div class="tags ">
+                <th:block th:if="${null != categories}">
+                    <th:block th:each="category : ${categories}">
+                       <a th:href="@{'/category/' + ${category.categoryId}}" class="tag tooltipped tooltipped-n">
+                            <th:block th:text="${category.categoryName}"></th:block>
+                        </a>
                     </th:block>
-                </ul>
+                </th:block>
             </div>
         </section>
         <section>
@@ -60,8 +57,8 @@
             </div>
             <main class="sidebar-lists">
                 <ul>
-                    <th:block th:if="${null != hotBlogs}">
-                        <th:block th:each="hotBlog : ${hotBlogs}">
+                    <th:block th:if="${null != favoriteBlogs}">
+                        <th:block th:each="hotBlog : ${favoriteBlogs}">
                             <li class="sidebar-list-item"><a class="tag tooltipped tooltipped-n"
                                                              th:href="@{'/blog/' + ${hotBlog.blogId}}">
                                 <th:block th:text="${hotBlog.blogTitle}"></th:block>

@@ -5,17 +5,17 @@ import com.reborn.springboot.entity.Blog;
 import com.reborn.springboot.entity.BlogComment;
 import com.reborn.springboot.entity.Result;
 import com.reborn.springboot.entity.vo.BlogDetailVO;
-import com.reborn.springboot.service.BlogService;
-import com.reborn.springboot.service.CommentService;
-import com.reborn.springboot.service.ConfigurationService;
+import com.reborn.springboot.service.*;
 import com.reborn.springboot.utils.ResultGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -32,6 +32,12 @@ public class BlogController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private TagService tagService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     /**
      * 博客首页
@@ -59,6 +65,13 @@ public class BlogController {
         PageInfo<Blog> blogPageResult = blogService.getBlogsPage(map);
         request.setAttribute("blogPageResult", blogPageResult);
 
+        //所有标签
+        request.setAttribute("Tags",tagService.getTagsList());
+        //所有分裂
+        request.setAttribute("categories", categoryService.getCategoryList());
+        //点击最多的博客
+        map.clear();
+        request.setAttribute("favoriteBlogs",blogService.getFavoriteBlogs(map));
         //获取配置项，存入request域中
         request.setAttribute("configurations",configurationService.getAllConfigurations());
         request.setAttribute("pageName","首页");
@@ -109,5 +122,54 @@ public class BlogController {
             return ResultGenerator.getFailResult("评论失败");
         }
         return ResultGenerator.getSuccessResult("评论成功");
+    }
+
+    /**
+     * 前台博客的搜索
+     * @param keyword
+     * @param model
+     * @param request
+     * @return
+     */
+    @GetMapping("/search/{keyword}")
+    public String searchBlog(@PathVariable String keyword, Model model,HttpServletRequest request){
+        Map<String,Object> params = new HashMap<>();
+        params.put("keyword", keyword);
+        //分页写死，第一页5条记录
+        params.put("pageNum","1");
+        params.put("pageSize", pageSize);
+        PageInfo<Blog> blogsPage = blogService.getBlogsPage(params);
+        model.addAttribute("blogPageResult",blogsPage);
+        setConfig(request);
+        return "/blog/" + indexName + "/list";
+    }
+
+    /**
+     * 用标签查找对应的博客
+     * @param tagName
+     * @return
+     */
+    @GetMapping("/tag/{tagName}")
+    public String searchBlogsByTagName(@PathVariable String tagName,HttpServletRequest request){
+        List<Blog> blogs = blogService.getBlogsByTagName(tagName);
+        request.setAttribute("blogPageResult", new PageInfo<>(blogs));
+        setConfig(request);
+        return "/blog/" + indexName + "/list";
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public String searchBlogsByCategoryId(@PathVariable Integer categoryId,HttpServletRequest request){
+        List<Blog> blogs = blogService.getBlogsByCategoryId(categoryId);
+        request.setAttribute("blogPageResult",new PageInfo<>(blogs));
+        setConfig(request);
+        return "/blog/" + indexName + "/list";
+    }
+
+    /**
+     * 设置博客的配置项
+     */
+    public void setConfig(HttpServletRequest request){
+        //配置项
+        request.setAttribute("configurations",configurationService.getAllConfigurations());
     }
 }

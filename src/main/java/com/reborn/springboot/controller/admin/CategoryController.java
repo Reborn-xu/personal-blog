@@ -46,7 +46,7 @@ public class CategoryController {
         return ResultGenerator.getSuccessResult("保存成功");
     }
 
-    @GetMapping("/update")
+    @PostMapping("/update")
     @ResponseBody
     public Result updateCategory(BlogCategory blogCategory){
         String result = categoryService.updateCategoryByPrimary(blogCategory);

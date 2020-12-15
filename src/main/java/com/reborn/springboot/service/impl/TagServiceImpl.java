@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -24,5 +26,17 @@ public class TagServiceImpl implements TagService {
         int pageSize=Integer.parseInt((String) map.get("pageSize"));
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(tagMapper.findTagList());
+    }
+
+    @Override
+    public List<BlogTag> getTagsList() {
+        return tagMapper.findTagList();
+    }
+
+    @Override
+    public BlogTag getTagsByPrimary(Integer tagId) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("tagId", tagId);
+        return tagMapper.selectTag(params);
     }
 }

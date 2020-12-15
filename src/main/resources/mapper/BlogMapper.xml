@@ -30,7 +30,19 @@
         <if test="blogStatus!=null">
             blog_status=#{blogStatus} AND
         </if>
+        <if test="blogName!=null">
+            FIND_IN_SET(#{blogName},blog_tags) >= 1 AND
+        </if>
+        <if test="categoryId!=null">
+            blog_category_id=#{categoryId} AND
+        </if>
         is_deleted=0
+        <if test="orderByBlogView!=null and orderByBlogView==1">
+            order BY blog_views DESC
+        </if>
+        <if test="limit!=null">
+            limit #{limit}
+        </if>
     </select>
 
     <insert id="insertNewBlog" parameterType="com.reborn.springboot.entity.Blog"
