@@ -3,6 +3,7 @@ package com.reborn.springboot.controller.common;
 import com.reborn.springboot.entity.Result;
 import com.reborn.springboot.utils.ResultGenerator;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +21,7 @@ import java.util.UUID;
 @RequestMapping("/admin/upload")
 public class UploadController {
 
-    private static final String filePath = "/upload/img/";
+    private static final String filePath = "/static/upload/img/";
 
     @RequestMapping("/file")
     @ResponseBody
@@ -28,12 +29,14 @@ public class UploadController {
         String fileName = file.getOriginalFilename();
         String subfixName = fileName.substring(fileName.lastIndexOf("."));
         StringBuffer sb = new StringBuffer();
-        String referncedId = UUID.randomUUID().toString();
+        String referncedId = UUID.randomUUID().toString().replace("-", "");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         sb.append(sdf.format(new Date())).append("-"+referncedId).append(subfixName);
         String newFileName = sb.toString();
-        File newFile = new File(filePath+newFileName);
-        File fileDirectory = new File(filePath);
+        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath();
+        File fileDirectory = new File(path,filePath);
+        File newFile = new File(fileDirectory,newFileName);
+        //System.out.println(request.getSession().getServletContext().getRealPath("/"));
         try {
             if (!fileDirectory.exists()){
                 if (!fileDirectory.mkdirs()){
@@ -41,13 +44,13 @@ public class UploadController {
                 }
             }
             file.transferTo(newFile);
-
+            String url = filePath.substring(filePath.indexOf("/",1))+newFileName;
+            Result result = ResultGenerator.getSuccessResult("success");
+            result.setData(url);
+            return result;
         }catch (IOException e){
             e.printStackTrace();
             return ResultGenerator.getFailResult("上传失败");
         }
-
-
-        return null;
     }
 }
