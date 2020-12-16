@@ -35,4 +35,13 @@
         </trim>
     </insert>
 
+    <delete id="deletePermissions" parameterType="Integer">
+        DELETE  FROM tb_permission
+        WHERE
+        permission_id IN
+        <foreach collection="ids" item="permissionId" separator="," open="(" close=")">
+            #{permissionId}
+        </foreach>
+    </delete>
+
 </mapper>

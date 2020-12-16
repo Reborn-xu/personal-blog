@@ -10,4 +10,6 @@ public interface PermissionMapper {
     List<Permission> findPermissionList(Map<String, Object> map);
 
     int insertPermission(Permission permission);
+
+    int deletePermissions(Integer[] ids);
 }

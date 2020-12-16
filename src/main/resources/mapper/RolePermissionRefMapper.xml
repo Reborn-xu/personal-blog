@@ -13,6 +13,15 @@
         where role_id=#{roleId}
     </delete>
 
+    <delete id="deleteRolePermissionsByPermissionId" parameterType="Integer">
+        DELETE  FROM tb_role_permission_ref
+        WHERE
+        permission_id IN
+        <foreach collection="ids" item="permissionId" separator="," open="(" close=")">
+            #{permissionId}
+        </foreach>
+    </delete>
+
     <insert id="insertRolePermissions" parameterType="java.lang.Integer">
         insert into tb_role_permission_ref
         (role_id,permission_id)

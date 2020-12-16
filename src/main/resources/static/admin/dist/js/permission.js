@@ -99,7 +99,7 @@ function editBlog() {
     window.location.href = "/admin/blogs/edit/" + id;
 }
 
-function deleteBlog() {
+function deletePermissions() {
     var ids = getSelectedRows();
     if (ids == null) {
         return;
@@ -114,7 +114,7 @@ function deleteBlog() {
         if (flag) {
             $.ajax({
                 type: "POST",
-                url: "/admin/blogs/delete",
+                url: "/admin/permissions/delete",
                 contentType: "application/json",
                 data: JSON.stringify(ids),
                 success: function (r) {

@@ -12,4 +12,6 @@ public interface PermissionService {
     String savePermission(Permission permission);
 
     List<Permission> getPermissionList();
+
+    String deletePermissions(Integer[] ids);
 }

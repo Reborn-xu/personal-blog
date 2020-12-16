@@ -56,4 +56,14 @@ public class PermissionController {
         List<Permission> permissions = permissionService.getPermissionList();
         return ResultGenerator.getSuccessResult(permissions);
     }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public Result deletePermissions(@RequestBody Integer[] ids){
+        String result = permissionService.deletePermissions(ids);
+        if (!result.equals("success")){
+            return ResultGenerator.getFailResult("删除失败");
+        }
+        return ResultGenerator.getSuccessResult("删除成功");
+    }
 }

@@ -9,4 +9,6 @@ public interface RolePermissionRefMapper {
     int deleteRolePermissionsByRoleId(Integer roleId);
 
     int insertRolePermissions(@Param("roleId") Integer roleId, @Param("permissions") Integer[] permissions);
+
+    int deleteRolePermissionsByPermissionId(Integer[] ids);
 }
