@@ -18,9 +18,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -151,5 +149,20 @@ public class AdminController {
     @RequestMapping("/profile")
     public String profile(){
         return "admin/profile";
+    }
+
+    @GetMapping("/checkUserName")
+    @ResponseBody
+    public Result checkUserName(@RequestParam("userName") String username){
+        if (username == null){
+            return ResultGenerator.getFailResult("username is null");
+        }
+        String result = userService.checkUserName(username);
+        if (result.equals("success")){
+            return ResultGenerator.getSuccessResult("");
+        }
+        else {
+            return ResultGenerator.getFailResult("用户名已存在");
+        }
     }
 }

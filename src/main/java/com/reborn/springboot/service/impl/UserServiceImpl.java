@@ -64,6 +64,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String checkUserName(String username) {
+        User user = userMapper.getUserByUsername(username);
+        return user == null? "success" : "fail";
+    }
+
+    @Override
     public String lockUser(Map<String, Object> map) {
         map.put("locked",1);
         int result = userMapper.updateUserByPrimary(map);

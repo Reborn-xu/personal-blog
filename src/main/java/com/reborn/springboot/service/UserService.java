@@ -17,4 +17,6 @@ public interface UserService {
     String editUserRole(Integer userId, Integer roleId);
 
     String lockUser(Map<String, Object> map);
+
+    String checkUserName(String username);
 }

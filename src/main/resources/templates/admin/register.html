@@ -68,6 +68,12 @@
                     <input type="email" id="email" name="email" class="form-control" placeholder="请输入邮箱"
                            required="true">
                 </div>
+                <div class="form-group has-feedback">
+                    <span class="fa fa-envelope-o form-control-feedback"></span>
+                    <input type="text" id="verifyCode" name="verifyCode" class="form-control" placeholder="请输入邮箱验证码"
+                           required="true">
+                    <span><button type="button" id="sendVerifyCode" class="btn btn-primary btn-block btn-flat">发送验证码</button></span>
+                </div>
                 <!--<div class="row">
                     <div class="col-6">
                         <input type="text" class="form-control" name="verifyCode" placeholder="请输入验证码" required="true">
@@ -104,5 +110,43 @@
 <script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/admin/dist/js/plugins/particles.js}"></script>
 <script th:src="@{/admin/dist/js/plugins/login-bg-particles.js}"></script>
+<script>
+    $('#userName').focusout(function () {
+        var userName = $("#userName").val();
+        if (userName == null||userName == ""){
+            return;
+        }
+        if (userName.length<3||userName.length>10){
+            alert("请输入3-10个字符的用户名");
+            return;
+        }
+        $.ajax({
+            type: 'GET',//方法类型
+            url: "/admin/checkUserName",
+            data: {"userName":userName},
+            success: function (result) {
+                if (result.resultCode == 200) {
+
+                }
+                else {
+                    alert(result.message);
+                    $("#userName").val("");
+                }
+                ;
+            },
+            error: function () {
+                alert("操作失败");
+            }
+        });
+    });
+
+    $("#repassword").focusout(function () {
+       if ($("#repassword").val()!=$("#password").val()){
+           alert("两次密码不相等");
+           $("#repassword").val("");
+       }
+
+    });
+</script>
 </body>
 </html>

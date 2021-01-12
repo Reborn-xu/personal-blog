@@ -55,6 +55,7 @@ public class ShiroConfig {
         filterMap.put("/admin/login","anon");
         filterMap.put("/admin/register","anon");
         filterMap.put("/admin/logout","anon");
+        filterMap.put("/admin/checkUserName","anon");
         filterMap.put("/admin/profile","anon");
         filterMap.put("/admin/blogs/**","authc");
         filterMap.put("/admin/upload/**","authc");
