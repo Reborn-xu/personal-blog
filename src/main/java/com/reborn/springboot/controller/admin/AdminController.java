@@ -6,6 +6,7 @@ import com.reborn.springboot.entity.User;
 import com.reborn.springboot.entity.vo.UserVo;
 import com.reborn.springboot.service.RoleService;
 import com.reborn.springboot.service.UserService;
+import com.reborn.springboot.utils.RedisUtil;
 import com.reborn.springboot.utils.ResultGenerator;
 import org.apache.catalina.Session;
 import org.apache.shiro.SecurityUtils;
@@ -18,7 +19,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -137,11 +140,36 @@ public class AdminController {
     }
 
     @PostMapping("/registerCheck")
-    public String registerCheck(User user,Model model){
+    public String registerCheck(User user,Model model,HttpServletRequest request){
+        if (user == null){
+            model.addAttribute("errorMsg2","请完善信息");
+            return "/admin/register";
+        }
+        String verifyCode = request.getParameter("verifyCode");
+        if (verifyCode.isEmpty()){
+            model.addAttribute("errorMsg2","请输入验证码");
+            return "/admin/register";
+        }
+        Jedis jedis = RedisUtil.getJedisConnection();
+        String emailKey = "verify:"+user.getEmail()+":code";
+        String emailValue = jedis.get(emailKey);
+        if (StringUtils.isEmpty(emailValue)){
+            model.addAttribute("errorMsg2","验证码不存在或已过期");
+            jedis.close();
+            return "/admin/register";
+        }
+        if (!emailValue.equals(verifyCode)){
+            model.addAttribute("errorMsg2","验证码错误");
+            jedis.close();
+            return "/admin/register";
+        }
         String result = userService.registerUser(user);
         if (result.equals("success")){
+            jedis.del(emailKey);
+            jedis.close();
             return "redirect:/admin/login";
         }
+        jedis.close();
         model.addAttribute("errorMsg2","注册失败");
         return "/admin/register";
     }

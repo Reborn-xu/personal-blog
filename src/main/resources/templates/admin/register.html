@@ -40,8 +40,8 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">Register</p>
             <form th:action="@{/admin/registerCheck}" method="post">
-                <div th:if="${not #strings.isEmpty(session.errorMsg2)}" class="form-group">
-                    <div class="alert alert-danger" th:text="${session.errorMsg2}"></div>
+                <div th:if="${not #strings.isEmpty(errorMsg2)}" class="form-group">
+                    <div class="alert alert-danger" th:text="${errorMsg2}"></div>
                 </div>
                 <div class="form-group has-feedback">
                     <span class="fa fa-user form-control-feedback"></span>
@@ -68,11 +68,15 @@
                     <input type="email" id="email" name="email" class="form-control" placeholder="请输入邮箱"
                            required="true">
                 </div>
-                <div class="form-group has-feedback">
-                    <span class="fa fa-envelope-o form-control-feedback"></span>
-                    <input type="text" id="verifyCode" name="verifyCode" class="form-control" placeholder="请输入邮箱验证码"
-                           required="true">
-                    <span><button type="button" id="sendVerifyCode" class="btn btn-primary btn-block btn-flat">发送验证码</button></span>
+                <div class="row">
+                    <div class="col-6">
+                        <input type="text" id="verifyCode" name="verifyCode" class="form-control" placeholder="请输入邮箱验证码"
+                               required="true">
+                    </div>
+                    <div class="col-6">
+                        <button type="button" id="sendVerifyCode" class="btn btn-primary btn-block btn-flat">发送验证码</button>
+                        <!--<font id="countdown" color="red" ></font>-->
+                    </div>
                 </div>
                 <!--<div class="row">
                     <div class="col-6">
@@ -132,7 +136,7 @@
                     alert(result.message);
                     $("#userName").val("");
                 }
-                ;
+
             },
             error: function () {
                 alert("操作失败");
@@ -147,6 +151,47 @@
        }
 
     });
+    var interval;
+    var t=60;//设定倒计时的时间
+    function refer(){
+        $("#sendVerifyCode").text("请于"+t+"秒内填写 "); // 显示倒计时
+        t--; // 计数器递减
+        if(t<=0){
+            clearInterval(interval);
+            $("#sendVerifyCode").attr("disabled",false).css("color", "");
+            $("#sendVerifyCode").text("发送验证码");
+
+        }
+    }
+    $('#sendVerifyCode').click(function () {
+        var email = $('#email').val();
+        if (email == null){
+            alert("email不能为空");
+            return;
+        }
+        $.ajax({
+            type: 'GET',//方法类型
+            url: "/sendVerifyCode",
+            data: {"email":email},
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    alert(result.message);
+                    t=60;
+                    clearInterval(interval);
+                    $("#sendVerifyCode").attr("disabled",true).css("color", "#A0A1A3");
+                    interval= setInterval("refer()",1000);//启动1秒定时
+                }
+                else {
+                    alert(result.message);
+                }
+
+            },
+            error: function () {
+                alert("操作失败");
+            }
+        });
+
+    })
 </script>
 </body>
 </html>

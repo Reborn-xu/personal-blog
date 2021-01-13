@@ -6,6 +6,7 @@ import jdk.nashorn.internal.parser.DateParser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import redis.clients.jedis.Jedis;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,12 +39,11 @@ class SpringbootApplicationTests {
 
     @Test
     void test1(){
-        if (1==2){
-            System.out.println(1);
-        }else if (2==2){
-            System.out.println(2);
-        }
-        System.out.println("over");
+        Jedis jedis = new Jedis("47.107.45.21",8888);
+        jedis.auth("Reborn123,./");
+        System.out.println(jedis.ping());
+        String s = jedis.get("verify");
+        System.out.println(":"+s);
     }
 
     @Test
